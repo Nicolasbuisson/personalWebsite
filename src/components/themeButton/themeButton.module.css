@@ -1,0 +1,7 @@
+.themeButton {
+    padding: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--clr-text);
+    background-color: var(--clr-body-bg);
+    cursor: pointer;
+}
