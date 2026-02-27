@@ -57,23 +57,31 @@
 }
 
 @keyframes circle-in {
-  from { clip-path: circle(0% at 50% 0%); }
-  to { clip-path: circle(120% at 50% 0%); }
+  from {
+    clip-path: circle(0% at 50% 0%);
+  }
+
+  to {
+    clip-path: circle(120% at 50% 0%);
+  }
 }
 
 body {
   color-scheme: light;
-  
+
   --clr-body-bg: hsl(0, 0%, 100%);
   --clr-card-bg: hsl(10, 25%, 98%);
   --clr-text: #000000;
   --clr-heading: hsl(18, 65%, 48%);
   --clr-accent: #2B45FF;
   --clr-accent-gradient-start: #1F2FCC;
-  
+  --clr-yellow-sun: #d69e2e;
+  --clr-blue-moon-border: #DBEAFE;
+  --clr-blue-moon-fill: #63b3ed;
+
   @container style(--theme: dark) {
     color-scheme: dark;
-    
+
     --clr-body-bg: hsl(173, 10%, 7%);
     --clr-card-bg: hsl(173, 30%, 10%);
     --clr-text: #cbd5e1;
