@@ -1,0 +1,52 @@
+.footerContainer {
+  --footer-container-height: 100vh;
+  --footer-svg-height: 10vh;
+  --footer-height: 90vh;
+  width: 100%;
+  background-color: bisque;
+}
+
+.footerCircleContainer {
+  position: relative;
+  height: var(--footer-svg-height);
+  width: 100%;
+  background-color: red;
+}
+
+.footerCircle {
+  height: 1400%;
+  width: 120%;
+  left: -10%;
+  border-radius: 0 0 50% 50%;
+  z-index: 1;
+  position: absolute;
+  background-color: purple;
+}
+
+.footerClipPathContainer {
+  position: relative;
+  height: var(--footer-height);
+  clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
+  width: 100%;
+}
+
+.footer {
+  position: fixed;
+  /*position fixed is relative to the whole window... 
+  so will always be under everything else which could cause issues potentially */
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+}
+
+.footerContent {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.footerContentColumn {
+  display: flex;
+  flex-direction: column;
+}
