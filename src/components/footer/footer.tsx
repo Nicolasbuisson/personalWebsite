@@ -3,6 +3,7 @@ import Link from "next/link";
 import styles from "./footer.module.css";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
+import { Copyright } from "../copyright/copyright";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -12,6 +13,8 @@ export const Footer = () => {
     offset: ["start end", "start start"],
   });
 
+  // 0.9 here must match css variable: --footer-height
+  // else scroll won't match up
   const circleHeight = useTransform(scrollYProgress, [0, 0.9], [50, 0]);
 
   return (
@@ -36,7 +39,7 @@ export const Footer = () => {
               <span>More info</span>
             </div>
           </div>
-          <div>©Copyright</div>
+          <Copyright />
         </footer>
       </div>
     </div>

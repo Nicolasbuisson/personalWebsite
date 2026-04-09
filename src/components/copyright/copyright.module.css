@@ -1,0 +1,52 @@
+.logo {
+  padding: 1rem;
+  display: flex;
+  --transition-animation: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.copyright {
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: var(--transition-animation);
+}
+
+.name {
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-top: 0.125rem;
+  margin-left: 5px;
+  transition: var(--transition-animation);
+}
+
+.name p {
+  display: inline-block;
+  position: relative;
+  font-weight: 500;
+  transition: var(--transition-animation);
+}
+
+.name p:nth-of-type(3) {
+  position: absolute;
+  left: 120px;
+}
+
+.logo:hover .copyright {
+  transform: rotate(360deg);
+}
+
+.logo:hover .name {
+  padding-right: 30px;
+}
+
+.logo:hover .codeBy {
+  transform: translateX(-100%);
+}
+
+.logo:hover .nico {
+  transform: translateX(-65px);
+}
+
+.logo:hover .buisson {
+  transform: translateX(-86px);
+}
