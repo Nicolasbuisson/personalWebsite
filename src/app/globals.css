@@ -7,7 +7,7 @@
   --fs-h2: 2.5rem;
   --fs-h3: 1.5rem;
   --fs-h4: 1.15rem;
-  --fs-body: 1.0rem;
+  --fs-body: 1rem;
 
   --scroll: 0;
   --section-padding-block: 3rem;
@@ -20,7 +20,7 @@
     --fs-h2: 3.1rem;
     --fs-h3: 1.75rem;
     --fs-h4: 1.25rem;
-    --fs-body: 1.0rem;
+    --fs-body: 1rem;
 
     --section-padding-block: 6rem;
     --section-padding-inline: 8rem;
@@ -68,15 +68,16 @@
 
 body {
   color-scheme: light;
+  --clr-white: #ffffff;
 
   --clr-body-bg: hsl(0, 0%, 100%);
   --clr-card-bg: hsl(10, 25%, 98%);
   --clr-text: #000000;
   --clr-heading: hsl(18, 65%, 48%);
-  --clr-accent: #2B45FF;
-  --clr-accent-gradient-start: #1F2FCC;
+  --clr-accent: #2b45ff;
+  --clr-accent-gradient-start: #1f2fcc;
   --clr-yellow-sun: #d69e2e;
-  --clr-blue-moon-border: #DBEAFE;
+  --clr-blue-moon-border: #dbeafe;
   --clr-blue-moon-fill: #63b3ed;
 
   @container style(--theme: dark) {
@@ -86,8 +87,8 @@ body {
     --clr-card-bg: hsl(173, 30%, 10%);
     --clr-text: #cbd5e1;
     --clr-heading: hsl(173, 50%, 70%);
-    --clr-accent: #2B45FF;
-    --clr-accent-gradient-start: #1F2FCC;
+    --clr-accent: #2b45ff;
+    --clr-accent-gradient-start: #1f2fcc;
   }
 }
 
@@ -144,11 +145,24 @@ body {
   font-family: var(--ff-primary);
 }
 
+html {
+  /* Hides scrollbar for Firefox */
+  scrollbar-width: none;
+
+  /* Hides scrollbar for IE and Edge (Legacy) */
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  /* Hides scrollbar for Chrome, Safari, and Opera (WebKit browsers) */
+  display: none;
+}
 
 /* custom scrollbar styling */
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
   width: 0.5rem;
-  background: var(--clr-dark);
+  background: var(--clr-body-bg);
+  background: transparent;
 }
 
 body::-webkit-scrollbar-track {
@@ -157,7 +171,8 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background: var(--clr-light);
+  background: var(--clr-text);
+  background: transparent;
   border-radius: 100vw;
-  border: 2px solid var(--clr-dark);
-}
+  border: 2px solid var(--clr-text);
+} */
