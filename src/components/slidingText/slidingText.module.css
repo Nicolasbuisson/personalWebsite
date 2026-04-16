@@ -5,32 +5,10 @@
   display: flex;
   white-space: nowrap;
   padding-bottom: 2rem;
-
-  --animation-duration: 10s;
-  --reverse-animation-play-state: paused;
-}
-
-/* used to wrap the p element to give it a differnt animation */
-.textSliderContainer div {
-  animation: textTranslate calc(var(--animation-duration) / 2) linear infinite;
-  animation-direction: reverse;
-  animation-play-state: var(--reverse-animation-play-state);
 }
 
 .textSliderContainer p {
   font-size: 12vh;
   font-weight: 600;
   color: var(--clr-white);
-
-  animation: textTranslate var(--animation-duration) linear infinite;
-  animation-play-state: running;
-}
-
-@keyframes textTranslate {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
 }
