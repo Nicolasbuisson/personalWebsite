@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "lenis/dist/lenis.css"; // styling for Lenis to work properly
+import { ReactLenis } from "lenis/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nicolas Buisson",
-  description: "Personal website for Nicolas Buisson to showcase his skills and projects",
+  description:
+    "Personal website for Nicolas Buisson to showcase his skills and projects",
 };
 
 export default function RootLayout({
@@ -24,9 +27,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
-      </body>
+      <ReactLenis root>
+        <body className={`${geistSans.variable} ${geistMono.variable}`}>
+          {children}
+        </body>
+      </ReactLenis>
     </html>
   );
 }
