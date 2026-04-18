@@ -108,6 +108,9 @@ export const SlidingText = () => {
       <div className="text-slider-p-container">
         <p>Nicolas Buisson -&nbsp;</p>
       </div>
+      <div className="text-slider-p-container">
+        <p>Nicolas Buisson -&nbsp;</p>
+      </div>
     </div>
   );
 };

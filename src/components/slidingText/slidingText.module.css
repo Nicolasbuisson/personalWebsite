@@ -1,6 +1,7 @@
 .textSliderContainer {
   bottom: 0;
-  width: 100%;
+  width: fit-content;
+  left: -90%;
   position: absolute;
   display: flex;
   white-space: nowrap;
@@ -8,7 +9,7 @@
 }
 
 .textSliderContainer p {
-  font-size: 12vh;
+  font-size: 11vw;
   font-weight: 600;
   color: var(--clr-white);
 }
