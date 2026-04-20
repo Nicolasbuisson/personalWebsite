@@ -43,23 +43,24 @@ export const SlidingText = () => {
         duration: ANIMATION_DURATION,
         iterations: Infinity,
       });
-      // initialize playback rate to 2 to get overlapping animations
-      // but one runs twice as fast as the other resulting in movement
-      containerAnimation.updatePlaybackRate(2);
+      // initialize container playback rate to 1 and paragraph playback rate to 0 to get overlapping animations
+      // switch which one runs based on scroll
+      containerAnimation.updatePlaybackRate(1);
       containerAnimations.push(containerAnimation);
       // add animation to paragraph
       const paragraphAnimation = p
         .querySelector("p")
         ?.animate(animationTextSlideRight, animationTiming);
+      paragraphAnimation?.updatePlaybackRate(0);
       if (paragraphAnimation) paragraphAnimations.push(paragraphAnimation);
     });
   }, []);
 
-  const containerPlaybackRate = useTransform(scrollVelocity, [0, 1000], [2, 4]);
+  const containerPlaybackRate = useTransform(scrollVelocity, [0, 1000], [1, 6]);
   const paragraphPlaybackRate = useTransform(
     scrollVelocity,
     [-1000, 0],
-    [4, 2],
+    [6, 1],
   );
 
   useMotionValueEvent(scrollVelocity, "change", (latestVelocity) => {
@@ -69,16 +70,16 @@ export const SlidingText = () => {
       const diff = scrollY.get() - (previous ?? 0);
       if (diff > 0) {
         // positive diff means scrolling down reset to:
-        // containerPlaybackRate: 2
-        // paragraphPlaybackRate: 1
-        containerAnimations.forEach((anim) => anim.updatePlaybackRate(2));
-        paragraphAnimations.forEach((anim) => anim.updatePlaybackRate(1));
+        // containerPlaybackRate: 1
+        // paragraphPlaybackRate: 0
+        containerAnimations.forEach((anim) => anim.updatePlaybackRate(1));
+        paragraphAnimations.forEach((anim) => anim.updatePlaybackRate(0));
       } else if (diff < 0) {
         // negative diff means scrolling up reset to:
-        // containerPlaybackRate: 1
-        // paragraphPlaybackRate: 2
-        containerAnimations.forEach((anim) => anim.updatePlaybackRate(1));
-        paragraphAnimations.forEach((anim) => anim.updatePlaybackRate(2));
+        // containerPlaybackRate: 0
+        // paragraphPlaybackRate: 1
+        containerAnimations.forEach((anim) => anim.updatePlaybackRate(0));
+        paragraphAnimations.forEach((anim) => anim.updatePlaybackRate(1));
       }
     } else if (latestVelocity > 0) {
       // scrolling downwards, increase container playback rate
