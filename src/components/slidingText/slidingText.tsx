@@ -39,7 +39,7 @@ export const SlidingText = () => {
     );
     pContainers?.forEach((p) => {
       // add animation to paragraph container
-      const containerAnimation = p.animate(animationTextSlideLeft, {
+      const containerAnimation = p.animate(animationTextSlideRight, {
         duration: ANIMATION_DURATION,
         iterations: Infinity,
       });
@@ -50,7 +50,7 @@ export const SlidingText = () => {
       // add animation to paragraph
       const paragraphAnimation = p
         .querySelector("p")
-        ?.animate(animationTextSlideRight, animationTiming);
+        ?.animate(animationTextSlideLeft, animationTiming);
       paragraphAnimation?.updatePlaybackRate(0);
       if (paragraphAnimation) paragraphAnimations.push(paragraphAnimation);
     });
