@@ -3,6 +3,7 @@ import Link from "next/link";
 import { motion, Variants } from "framer-motion";
 
 interface IProps {
+  framerMotionExitAnimationKey: string;
   data: any;
   isActive: boolean;
   setSelectedIndicator: React.Dispatch<React.SetStateAction<string>>;
@@ -26,11 +27,13 @@ const scale: Variants = {
 };
 
 export const NavLink = (props: IProps) => {
-  const { data, isActive, setSelectedIndicator } = props;
+  const { framerMotionExitAnimationKey, data, isActive, setSelectedIndicator } =
+    props;
   const { title, href, index } = data;
 
   return (
     <motion.div
+      key={framerMotionExitAnimationKey}
       className={styles.link}
       onMouseEnter={() => {
         setSelectedIndicator(href);
@@ -42,6 +45,7 @@ export const NavLink = (props: IProps) => {
       exit="exit"
     >
       <motion.div
+        key={framerMotionExitAnimationKey + "-indicator"}
         variants={scale}
         animate={isActive ? "open" : "closed"}
         className={styles.indicator}

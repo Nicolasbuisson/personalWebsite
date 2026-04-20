@@ -33,13 +33,18 @@ const menuSlide: Variants = {
   },
 };
 
-export const Nav = () => {
+interface IProps {
+  framerMotionExitAnimKey: string;
+}
+
+export const Nav = (props: IProps) => {
+  const { framerMotionExitAnimKey } = props;
   const pathname = usePathname();
   const [selectedIndicator, setSelectedIndicator] = useState(pathname);
 
   return (
     <motion.div
-      key={"key-to-animate-exit-transition-framer"}
+      key={framerMotionExitAnimKey}
       variants={menuSlide}
       initial="initial"
       animate="enter"
@@ -60,6 +65,7 @@ export const Nav = () => {
             return (
               <NavLink
                 key={index}
+                framerMotionExitAnimationKey={`navlink-${data.title}`}
                 data={{ ...data, index }}
                 isActive={selectedIndicator == data.href}
                 setSelectedIndicator={setSelectedIndicator}

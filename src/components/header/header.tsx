@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import styles from "./header.module.css";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence } from "framer-motion";
 import { Nav } from "../nav/nav";
 
 export const Header = () => {
@@ -23,7 +23,9 @@ export const Header = () => {
       </div>
 
       <AnimatePresence mode="wait">
-        {isOpen && <Nav key={"key-to-animate-exit-transition"} />}
+        {isOpen && (
+          <Nav framerMotionExitAnimKey="key-to-animate-exit-transition-framer" />
+        )}
       </AnimatePresence>
     </>
   );
