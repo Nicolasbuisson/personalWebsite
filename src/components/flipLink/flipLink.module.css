@@ -1,0 +1,23 @@
+.flipLink {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  width: fit-content;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--clr-light);
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  font-family: var(--ff-primary);
+  line-height: 0.8;
+  transition: all 0.3s ease-in-out;
+}
+
+.flipLink div span {
+  display: inline-block;
+}
+
+.flipLink div:nth-child(2) {
+  position: absolute;
+  inset: 0;
+}

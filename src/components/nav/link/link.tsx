@@ -1,6 +1,6 @@
 import styles from "./link.module.css";
-import Link from "next/link";
 import { motion, Variants } from "framer-motion";
+import { FlipLink } from "@/components/flipLink/flipLink";
 
 interface IProps {
   framerMotionExitAnimationKey: string;
@@ -50,7 +50,7 @@ export const NavLink = (props: IProps) => {
         animate={isActive ? "open" : "closed"}
         className={styles.indicator}
       ></motion.div>
-      <Link href={href}>{title}</Link>
+      <FlipLink href={href} label={title} />
     </motion.div>
   );
 };
