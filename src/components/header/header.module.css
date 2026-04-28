@@ -1,4 +1,5 @@
 .header {
+  transform: scale(0);
   padding: 30px;
   position: fixed;
   right: 0;
