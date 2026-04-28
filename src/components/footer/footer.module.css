@@ -10,7 +10,6 @@
   position: relative;
   height: var(--footer-svg-height);
   width: 100%;
-  background-color: red;
 }
 
 .footerCircle {
@@ -20,23 +19,23 @@
   border-radius: 0 0 50% 50%;
   z-index: 1;
   position: absolute;
-  background-color: purple;
+  background-color: rebeccapurple;
 }
 
 .footerClipPathContainer {
   position: relative;
-  height: var(--footer-height);
+  height: var(--footer-container-height);
   clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
   width: 100%;
 }
 
 .footer {
   position: fixed;
-  /*position fixed is relative to the whole window... 
+  /* position fixed is relative to the whole window... 
   so will always be under everything else which could cause issues potentially */
   bottom: 0;
   width: 100%;
-  height: var(--footer-height);
+  height: var(--footer-container-height);
 }
 
 .footerContent {

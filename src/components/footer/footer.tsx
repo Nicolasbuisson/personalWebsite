@@ -13,9 +13,8 @@ export const Footer = () => {
     offset: ["start end", "start start"],
   });
 
-  // 0.9 here must match css variable: --footer-height
-  // else scroll won't match up
-  const circleHeight = useTransform(scrollYProgress, [0, 0.9], [50, 0]);
+  // 0.9 or 1 here must match css variable: --footer-height/--footer-container-height else scroll won't match up
+  const circleHeight = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
   return (
     <div className={styles.footerContainer} ref={footerContainerRef}>
