@@ -11,6 +11,7 @@
   font-family: var(--ff-primary);
   line-height: 0.8;
   transition: all 0.3s ease-in-out;
+  cursor: pointer;
 }
 
 .flipLink div span {
