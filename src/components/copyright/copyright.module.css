@@ -1,11 +1,12 @@
 .logo {
+  width: fit-content;
   padding: 1rem;
   display: flex;
   --transition-animation: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .copyright {
-  font-size: 1.25rem;
+  font-size: var(--fs-h4);
   font-weight: 600;
   transition: var(--transition-animation);
 }
