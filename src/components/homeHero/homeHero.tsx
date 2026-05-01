@@ -6,7 +6,6 @@ export const HomeHero = () => {
   return (
     <main className={styles.main}>
       <Header />
-
       <SlidingText />
     </main>
   );

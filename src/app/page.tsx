@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer/footer";
 import styles from "./page.module.css";
 import { ThemeButton } from "@/components/themeButton/themeButton";
 import { HomeHero } from "@/components/homeHero/homeHero";
+import { WorkPreview } from "@/components/workPreview/workPreview";
 
 export default function Home() {
   return (
@@ -9,9 +10,8 @@ export default function Home() {
       <HomeHero />
       {/* <main className={styles.main}>
         <ThemeButton />
-        
       </main> */}
-      <div style={{ backgroundColor: "rebeccapurple", height: "100vh" }}></div>
+      <WorkPreview />
       <Footer />
     </div>
   );

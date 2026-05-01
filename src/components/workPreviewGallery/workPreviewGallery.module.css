@@ -1,0 +1,29 @@
+.gallery {
+  height: 120vh;
+  clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 0);
+  /* clip-path here emulates overflow hidden but for a position fixed item which in our case is the vignette */
+}
+
+.galleryImageContainer {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.galleryImageContainer img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.vignette {
+  height: 30vw;
+  width: 25vw;
+  position: fixed;
+  top: 0;
+}
+
+.vignette img {
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
