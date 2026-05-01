@@ -17,6 +17,13 @@
   justify-content: space-between;
 }
 
+@media (width <= 540px) {
+  .body {
+    width: 100vw;
+    padding: 60px;
+  }
+}
+
 .nav {
   display: flex;
   flex-direction: column;
