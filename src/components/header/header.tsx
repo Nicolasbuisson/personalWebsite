@@ -1,5 +1,5 @@
 "use client";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
 import { AnimatePresence } from "framer-motion";
 import { Nav } from "../nav/nav";
@@ -26,6 +26,10 @@ const navItems = [
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [
+    scrolledMoreThanWindowInnerHeight,
+    setScrolledMoreThanWindowInnerHeight,
+  ] = useState<boolean>(false);
 
   const burger = useRef<HTMLDivElement>(null);
 
@@ -60,15 +64,32 @@ export const Header = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const updateScrolledMoreThanWindowInnerHeight = () => {
+      setScrolledMoreThanWindowInnerHeight(
+        document.documentElement.scrollTop >=
+          document.documentElement.clientHeight,
+      );
+    };
+    window.addEventListener("scroll", updateScrolledMoreThanWindowInnerHeight);
+    () => {
+      window.removeEventListener(
+        "scroll",
+        updateScrolledMoreThanWindowInnerHeight,
+      );
+    };
+  }, []);
+
   return (
     <>
       <div ref={burger} className={styles.header}>
         <div
           onClick={() => {
             gsap.to(burger.current, {
-              scale: isOpen
-                ? 0 // closing
-                : 1, // opening
+              scale:
+                isOpen && !scrolledMoreThanWindowInnerHeight
+                  ? 0 // closing
+                  : 1, // opening
               duration: 0.25,
               ease: "power1.out",
             });
