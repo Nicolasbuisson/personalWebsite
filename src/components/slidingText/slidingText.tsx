@@ -13,6 +13,8 @@ export const SlidingText = () => {
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
 
+  // Can do GSAP infinite animation: Olivier LaRose How to make an Infinite Text Move on Scroll with Next.js and GSAP
+
   const ANIMATION_DURATION = 10000; // 10 seconds
 
   const animationTextSlideRight = [
@@ -39,19 +41,19 @@ export const SlidingText = () => {
     );
     pContainers?.forEach((p) => {
       // add animation to paragraph container
-      const containerAnimation = p.animate(animationTextSlideRight, {
+      const containerAnimation = p.animate(animationTextSlideLeft, {
         duration: ANIMATION_DURATION,
         iterations: Infinity,
       });
       // initialize container playback rate to 1 and paragraph playback rate to 0 to get overlapping animations
       // switch which one runs based on scroll
-      containerAnimation.updatePlaybackRate(1);
+      containerAnimation.updatePlaybackRate(0);
       containerAnimations.push(containerAnimation);
       // add animation to paragraph
       const paragraphAnimation = p
         .querySelector("p")
-        ?.animate(animationTextSlideLeft, animationTiming);
-      paragraphAnimation?.updatePlaybackRate(0);
+        ?.animate(animationTextSlideRight, animationTiming);
+      paragraphAnimation?.updatePlaybackRate(1);
       if (paragraphAnimation) paragraphAnimations.push(paragraphAnimation);
     });
   }, []);
