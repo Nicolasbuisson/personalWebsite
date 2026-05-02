@@ -1,0 +1,31 @@
+.projectGalleryItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-block: 1px solid rgb(201, 201, 201);
+  padding-inline: 50px;
+  padding-block: 100px;
+  transition: all 0.2s linear;
+}
+
+.projectGalleryItem h3 {
+  font-weight: 600;
+  transition: all 0.2s linear;
+}
+
+.projectGalleryItem p {
+  transition: all 0.2s linear;
+}
+
+.projectGalleryItem:hover {
+  opacity: 0.4;
+}
+
+.projectGalleryItem:hover h3 {
+  transform: translateX(-10px);
+}
+
+.projectGalleryItem:hover p {
+  transform: translateX(10px);
+}
