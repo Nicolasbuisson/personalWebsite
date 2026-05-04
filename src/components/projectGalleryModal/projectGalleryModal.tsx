@@ -1,6 +1,6 @@
 "use client";
-import Image from "next/image";
 import styles from "./projectGalleryModal.module.css";
+import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
@@ -38,7 +38,6 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
 
   const containerRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const cursorLabelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const moveContainerX = gsap.quickTo(containerRef.current, "left", {
@@ -57,14 +56,6 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
       duration: 0.5,
       ease: "power.3",
     });
-    const moveCursorLabelX = gsap.quickTo(cursorLabelRef.current, "left", {
-      duration: 0.45,
-      ease: "power.3",
-    });
-    const moveCursorLabelY = gsap.quickTo(cursorLabelRef.current, "top", {
-      duration: 0.45,
-      ease: "power.3",
-    });
 
     const modalEventListener = (e: MouseEvent) => {
       const { clientX, clientY } = e;
@@ -73,8 +64,6 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
       moveContainerY(clientY + window.scrollY);
       moveCursorX(clientX);
       moveCursorY(clientY + window.scrollY);
-      moveCursorLabelX(clientX);
-      moveCursorLabelY(clientY + window.scrollY);
     };
 
     window.addEventListener("mousemove", modalEventListener);
@@ -113,13 +102,6 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
       <motion.div
         ref={cursorRef}
         className={styles.cursor}
-        variants={scaleAnimation}
-        initial="initial"
-        animate={active ? "open" : "closed"}
-      ></motion.div>
-      <motion.div
-        ref={cursorLabelRef}
-        className={styles.cursorLabel}
         variants={scaleAnimation}
         initial="initial"
         animate={active ? "open" : "closed"}

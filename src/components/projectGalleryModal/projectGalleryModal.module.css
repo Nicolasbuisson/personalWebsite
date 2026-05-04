@@ -26,12 +26,7 @@
   justify-content: center;
 }
 
-.modal img {
-  /* height: auto; */
-}
-
-.cursor,
-.cursorLabel {
+.cursor {
   width: 80px;
   height: 80px;
   border-radius: 50%;
@@ -45,8 +40,4 @@
   font-size: 14px;
   font-weight: 300;
   pointer-events: none;
-}
-
-.cursorLabel {
-  background-color: transparent;
 }
