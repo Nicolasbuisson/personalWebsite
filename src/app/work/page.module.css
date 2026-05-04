@@ -1,4 +1,25 @@
 .projectGalleryContainer {
-  /* padding-block: 3rem;
-  padding-inline: 4rem; */
+  --project-gallery-padding-block: 4rem;
+  --project-gallery-padding-inline: 10rem;
+
+  padding-block: var(--project-gallery-padding-block);
+  padding-inline: var(--project-gallery-padding-inline);
+}
+
+@media (width < 1020px) {
+  .projectGalleryContainer {
+    --project-gallery-padding-inline: 6rem;
+  }
+}
+
+@media (width < 660px) {
+  .projectGalleryContainer {
+    --project-gallery-padding-inline: 4rem;
+  }
+}
+
+@media (width < 500px) {
+  .projectGalleryContainer {
+    --project-gallery-padding-inline: 2rem;
+  }
 }

@@ -13,19 +13,19 @@ interface IProjectGalleryModalProps {
 const scaleAnimation: Variants = {
   initial: {
     scale: 0,
-    x: "-50%",
-    y: "-50%",
+    x: "calc(-50% - var(--project-gallery-padding-inline))",
+    y: "calc(-50% - var(--project-gallery-padding-block))",
   },
   open: {
     scale: 1,
-    x: "-50%",
-    y: "-50%",
+    x: "calc(-50% - var(--project-gallery-padding-inline))",
+    y: "calc(-50% - var(--project-gallery-padding-block))",
     transition: { duration: 0.4, ease: [0.76, 0, 0.24, 1] },
   },
   closed: {
     scale: 0,
-    x: "-50%",
-    y: "-50%",
+    x: "calc(-50% - var(--project-gallery-padding-inline))",
+    y: "calc(-50% - var(--project-gallery-padding-block))",
     transition: { duration: 0.4, ease: [0.32, 0, 0.67, 1] },
   },
 };
