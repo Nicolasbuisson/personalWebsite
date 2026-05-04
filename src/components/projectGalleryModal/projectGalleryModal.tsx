@@ -14,7 +14,7 @@ const scaleAnimation: Variants = {
   initial: {
     scale: 0,
     x: "calc(-50% - var(--project-gallery-padding-inline))",
-    y: "calc(-50% - var(--project-gallery-padding-block))",
+    y: "calc(-50% - var(--project-gallery-padding-block)",
   },
   open: {
     scale: 1,
@@ -68,12 +68,13 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
 
     const modalEventListener = (e: MouseEvent) => {
       const { clientX, clientY } = e;
+      // account for scrollY when setting the modal's position
       moveContainerX(clientX);
-      moveContainerY(clientY);
+      moveContainerY(clientY + window.scrollY);
       moveCursorX(clientX);
-      moveCursorY(clientY);
+      moveCursorY(clientY + window.scrollY);
       moveCursorLabelX(clientX);
-      moveCursorLabelY(clientY);
+      moveCursorLabelY(clientY + window.scrollY);
     };
 
     window.addEventListener("mousemove", modalEventListener);
