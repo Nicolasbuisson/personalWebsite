@@ -1,6 +1,7 @@
+import { FC } from "react";
 import styles from "./copyright.module.css";
 
-export const Copyright = () => {
+export const Copyright: FC = () => {
   return (
     <a href="/" className={styles.logo}>
       <p className={styles.copyright}>©</p>

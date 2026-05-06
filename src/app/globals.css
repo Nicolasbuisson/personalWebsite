@@ -69,12 +69,14 @@
 body {
   color-scheme: light;
   --clr-white: #ffffff;
+  --clr-dark: #000;
 
+  --clr-light-grey-text: #c0c0c0;
   --clr-body-bg: hsl(0, 0%, 100%);
   --clr-card-bg: hsl(10, 25%, 98%);
   --clr-text: #000000;
   --clr-heading: hsl(18, 65%, 48%);
-  --clr-accent: #2b45ff;
+  --clr-accent: #7a2121;
   --clr-accent-gradient-start: #1f2fcc;
   --clr-yellow-sun: #d69e2e;
   --clr-blue-moon-border: #dbeafe;

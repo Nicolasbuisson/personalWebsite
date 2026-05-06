@@ -1,0 +1,42 @@
+.socialsIconContainer {
+  --icon-size: 36px;
+  --icon-padding: 8px;
+
+  display: flex;
+  align-items: center;
+}
+
+@media (width > 880px) {
+  .socialsIconContainer {
+    --icon-size: 44px;
+    --icon-padding: 10px;
+  }
+}
+
+.socialsLink {
+  transition: all 0.3s ease-in-out;
+  border-radius: 100%;
+  padding: 0px;
+  height: var(--icon-size);
+  width: var(--icon-size);
+}
+
+.socialsIcon {
+  padding: var(--icon-padding);
+  margin-inline: 0px;
+  filter: invert(90%) sepia(28%) saturate(2%) hue-rotate(257deg)
+    brightness(107%) contrast(100%);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  transition: all 0.3s ease-in-out;
+}
+
+/* hover effects */
+.socialsLink:hover {
+  background-color: var(--clr-accent);
+  transform: scale(0.9);
+}
+
+.socialsIcon:hover {
+  transform: scale(0.9);
+}
