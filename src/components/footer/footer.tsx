@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "motion/react";
 import { Copyright } from "../copyright/copyright";
 import { Socials } from "../socials/socials";
 import { FlipLink } from "../flipLink/flipLink";
+import { Button } from "../button/button";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,7 @@ export const Footer = () => {
   // make circle the same background as the previous section
   // look for footer inspo online...
   // maybe cool to have massive <Copyright> component be full screen width?
-  // maybe don't need footer to be 100vh?
+  // maybe don't need footer to be 100vh???
   const circleHeight = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
   return (
@@ -31,32 +32,41 @@ export const Footer = () => {
       </motion.div>
       <div className={styles.footerClipPathContainer}>
         <footer className={styles.footer}>
+          <div className={styles.footerCTA}>
+            <h1>
+              Let's Work<br></br>Together
+            </h1>
+            <div className={styles.footerCTAButtons}>
+              <Button>nicolas.buisson@mail.mcgill.ca</Button>
+              <Button>+1 514-649-9611</Button>
+            </div>
+          </div>
+          <hr className={styles.footerLine} />
+          <Copyright />
+          <hr className={styles.footerLine} />
           <div className={styles.footerContent}>
             <div className={styles.footerContentColumn}>
               <h4>Navigation</h4>
-              <FlipLink href="/" label="Home" />
-              <FlipLink href="/work" label="Work" />
-              <FlipLink href="/about" label="About" />
-              <FlipLink href="/contact" label="Contact" />
+              <div className={styles.footerNav}>
+                <FlipLink href="/" label="Home" />
+                <FlipLink href="/work" label="Work" />
+                <FlipLink href="/about" label="About" />
+                <FlipLink href="/contact" label="Contact" />
+              </div>
             </div>
             <div className={styles.footerContentColumn}>
-              <h4>Contact</h4>
-              <FlipLink
-                href="mailto:nicolas.buisson@mail.mcgill.ca"
-                label="nicolas.buisson@mail.mcgill.ca"
-              />
-              <FlipLink href="tel:+15146499611" label="+1514-649-9611" />
+              <h4>Based in</h4>
+              <div>Montreal, Canada</div>
+            </div>
+            <div className={styles.footerContentColumn}>
+              <h4>Local time</h4>
+              <div>TIME</div>
             </div>
             <div className={styles.footerContentColumn}>
               <h4>Socials</h4>
               <Socials />
             </div>
           </div>
-          <div className={styles.footerCTA}>
-            <h1>Let's Work Together</h1>
-          </div>
-          <hr className={styles.footerLine} />
-          <Copyright />
         </footer>
       </div>
     </div>
