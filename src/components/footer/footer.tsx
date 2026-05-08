@@ -6,6 +6,7 @@ import { Copyright } from "../copyright/copyright";
 import { Socials } from "../socials/socials";
 import { FlipLink } from "../flipLink/flipLink";
 import { Button } from "../button/button";
+import { Time } from "../time/time";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -60,7 +61,7 @@ export const Footer = () => {
             </div>
             <div className={styles.footerContentColumn}>
               <h4>Local time</h4>
-              <div>TIME</div>
+              <Time />
             </div>
             <div className={styles.footerContentColumn}>
               <h4>Socials</h4>
