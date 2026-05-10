@@ -58,6 +58,11 @@
   gap: 1rem;
 }
 
+.copyrightContainer {
+  width: fit-content;
+  margin-inline: auto;
+}
+
 .footerLine {
   height: 2px;
   width: 100%;

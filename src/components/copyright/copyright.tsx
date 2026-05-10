@@ -1,9 +1,16 @@
-import { FC } from "react";
 import styles from "./copyright.module.css";
 
-export const Copyright: FC = () => {
+interface ICopyrightProps {
+  fullScreenWidth?: boolean;
+}
+
+export const Copyright = (props: ICopyrightProps) => {
+  const { fullScreenWidth = false } = props;
   return (
-    <a href="/" className={styles.logo}>
+    <a
+      href="/"
+      className={`${styles.logo} ${fullScreenWidth ? styles.fullScreenWidth : ""}`}
+    >
       <p className={styles.copyright}>©</p>
       <div className={styles.name}>
         <p className={styles.codeBy}>Code by&nbsp;</p>

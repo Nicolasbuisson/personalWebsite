@@ -42,7 +42,9 @@ export const Footer = () => {
             </div>
           </div>
           <hr className={styles.footerLine} />
-          <Copyright />
+          <div className={styles.copyrightContainer}>
+            <Copyright fullScreenWidth />
+          </div>
           <hr className={styles.footerLine} />
           <div className={styles.footerContent}>
             <div className={styles.footerContentColumn}>

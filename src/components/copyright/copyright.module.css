@@ -8,6 +8,10 @@
   --transition-animation: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
+.fullScreenWidth {
+  font-size: 11vw;
+}
+
 .copyright {
   font-weight: 600;
   transition: var(--transition-animation);
@@ -39,7 +43,7 @@
 }
 
 .logo:hover .name {
-  padding-right: 3ch;
+  padding-right: 2ch;
 }
 
 .logo:hover .codeBy {
