@@ -4,7 +4,6 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Copyright } from "../copyright/copyright";
 import { Socials } from "../socials/socials";
-import { FlipLink } from "../flipLink/flipLink";
 import { Button } from "../button/button";
 import { Time } from "../time/time";
 
@@ -49,10 +48,10 @@ export const Footer = () => {
             <div className={styles.footerContentColumn}>
               <h4>Navigation</h4>
               <div className={styles.footerNav}>
-                <FlipLink href="/" label="Home" />
-                <FlipLink href="/work" label="Work" />
-                <FlipLink href="/about" label="About" />
-                <FlipLink href="/contact" label="Contact" />
+                <a href="/">Home</a>
+                <a href="/work">Work</a>
+                <a href="/about">About</a>
+                <a href="/contact">Contact</a>
               </div>
             </div>
             <div className={styles.footerContentColumn}>

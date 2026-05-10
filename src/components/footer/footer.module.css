@@ -101,8 +101,29 @@
 }
 
 .footerNav a {
-  font-size: var(--fs-body);
-  line-height: 1;
+  position: relative;
+  transition: all 0.2s ease-in;
+}
+
+.footerNav a:hover {
+  color: var(--clr-accent);
+  filter: saturate(1.5) brightness(1.2);
+}
+
+.footerNav a:after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  background-color: var(--clr-accent);
+  transition: all 0.2s ease-in;
+}
+
+.footerNav a:hover:after {
+  left: -5%;
+  width: 110%;
 }
 
 @media (width <= 880px) {
