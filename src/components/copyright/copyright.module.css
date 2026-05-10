@@ -2,11 +2,13 @@
   width: fit-content;
   padding: 1rem;
   display: flex;
+  align-items: flex-end;
+  font-size: var(--fs-h4);
+
   --transition-animation: all 0.5s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .copyright {
-  font-size: var(--fs-h4);
   font-weight: 600;
   transition: var(--transition-animation);
 }
@@ -29,7 +31,7 @@
 
 .name p:nth-of-type(3) {
   position: absolute;
-  left: 120px;
+  left: 13ch;
 }
 
 .logo:hover .copyright {
@@ -37,7 +39,7 @@
 }
 
 .logo:hover .name {
-  padding-right: 30px;
+  padding-right: 3ch;
 }
 
 .logo:hover .codeBy {
@@ -45,9 +47,9 @@
 }
 
 .logo:hover .nico {
-  transform: translateX(-65px);
+  transform: translateX(-6ch);
 }
 
 .logo:hover .buisson {
-  transform: translateX(-86px);
+  transform: translateX(-9.8ch);
 }
