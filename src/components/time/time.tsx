@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from "react";
 
 export const Time: FC = () => {
   const [time, setTime] = useState<string>(
-    new Date().toLocaleTimeString([], {
+    new Date().toLocaleTimeString(["en-US"], {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
@@ -15,7 +15,7 @@ export const Time: FC = () => {
   useEffect(() => {
     const updateTime = () => {
       setTime(
-        new Date().toLocaleTimeString([], {
+        new Date().toLocaleTimeString(["en-US"], {
           hour: "2-digit",
           minute: "2-digit",
           hour12: true,
