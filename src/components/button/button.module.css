@@ -8,6 +8,8 @@
   justify-content: center;
   padding-block: 15px;
   padding-inline: 40px;
+  background-color: var(--clr-white);
+  color: var(--clr-dark);
   overflow: hidden;
   transition: all 0.4s linear;
 }

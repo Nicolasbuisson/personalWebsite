@@ -37,8 +37,12 @@ export const Footer = () => {
               Let's Work<br></br>Together
             </h1>
             <div className={styles.footerCTAButtons}>
-              <Button>nicolas.buisson@mail.mcgill.ca</Button>
-              <Button>+1 514-649-9611</Button>
+              <a href="mailto:nicolas.buisson@mail.mcgill.ca">
+                <Button>nicolas.buisson@mail.mcgill.ca</Button>
+              </a>
+              <a href="tel:+15146499611">
+                <Button>+1 514-649-9611</Button>
+              </a>
             </div>
           </div>
           <hr className={styles.footerLine} />
