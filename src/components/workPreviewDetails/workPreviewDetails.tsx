@@ -14,17 +14,21 @@ export const WorkPreviewDetails = (props: IWorkPreviewDetailsProps) => {
   const { client, location, description, services, websiteUrl } = props;
 
   return (
-    <div className={styles.workPreviewDetails}>
-      <h4>{client}</h4>
-      <p>Description: {description}</p>
-      <p>
-        Services:{" "}
-        {services.map((tag) => {
-          return <span key={`${client}-tag-${tag}`}>{tag}</span>;
-        })}
-      </p>
-      <p>Location: {location}</p>
-      <ArrowPathLink url={websiteUrl} text="Visit site" />
+    <div className={styles.workPreviewDetailsContainer}>
+      <div className={styles.workPreviewDetailsIndicator}>
+        <div className={styles.workPreviewDetailsText}>
+          <h4>{client}</h4>
+          <p>Description: {description}</p>
+          <p>
+            Services:{" "}
+            {services.map((tag) => {
+              return <span key={`${client}-tag-${tag}`}>{tag}</span>;
+            })}
+          </p>
+          <p>Location: {location}</p>
+          <ArrowPathLink url={websiteUrl} text="Visit site" />
+        </div>
+      </div>
     </div>
   );
 };
