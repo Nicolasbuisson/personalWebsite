@@ -76,7 +76,7 @@ body {
   --clr-card-bg: hsl(10, 25%, 98%);
   --clr-text: #000000;
   --clr-heading: hsl(18, 65%, 48%);
-  --clr-accent: #7a2121;
+  --clr-accent: rgb(122, 33, 33);
   --clr-accent-gradient-start: #1f2fcc;
   --clr-yellow-sun: #d69e2e;
   --clr-blue-moon-border: #dbeafe;

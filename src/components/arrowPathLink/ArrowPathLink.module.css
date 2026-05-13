@@ -1,0 +1,22 @@
+.arrowPathLink {
+  display: block;
+  width: fit-content;
+}
+
+.arrowPathSvg {
+  --arrow-dimensions: 32px;
+  width: var(--arrow-dimensions);
+  height: var(--arrow-dimensions);
+  margin-inline: 0.25rem;
+  vertical-align: bottom;
+  transition: all 0.25s ease-in-out;
+  transform: rotate(-45deg);
+}
+
+.arrowPathLink:hover .arrowPathSvg {
+  transform: rotate(0deg);
+}
+
+.arrowPathLink:hover .arrowPathSvg path {
+  fill: var(--clr-accent);
+}

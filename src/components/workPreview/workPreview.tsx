@@ -21,8 +21,8 @@ export const WorkPreview = () => {
 
   const mouseMove = (e: any) => {
     const { clientX, clientY } = e;
-    const targetX = clientX - (window.innerWidth * 0.25) / 2;
-    const targetY = clientY - (window.innerHeight * 0.3) / 2;
+    const targetX = clientX - (window.innerWidth * 0.25) / 2; // because vignette width is 0.25vw?
+    const targetY = clientY - (window.innerHeight * 0.3) / 2; // because vignette height is 0.3vw?
     mousePosition.x.set(targetX);
     mousePosition.y.set(targetY);
   };
@@ -34,12 +34,22 @@ export const WorkPreview = () => {
         alt={""}
         vignetteImageUrl="/images/wine.jpg"
         mousePosition={mousePosition}
+        client="Alexon Media"
+        location="Dubai, UAE"
+        description="company website"
+        services={["Landing Page"]}
+        websiteUrl="https://www.alexonmedia.com"
       />
       <WorkPreviewGallery
         backgroundImageUrl={"/images/drone.jpg"}
         alt={""}
         vignetteImageUrl="/images/path.jpg"
         mousePosition={mousePosition}
+        client="Gourmandique"
+        location="Montreal, Canada"
+        description="company website"
+        services={["Ecommerce"]}
+        websiteUrl="https://www.alexonmedia.com"
       />
     </section>
   );
