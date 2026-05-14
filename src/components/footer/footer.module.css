@@ -50,10 +50,27 @@
   margin-inline: auto;
   display: flex;
   flex-direction: column;
+}
+
+.footerCTA h1 {
+  line-height: 1.1;
+}
+
+.footerCTAPictureContainer {
+  display: flex;
+  align-items: center;
   gap: 1rem;
 }
 
+.profilePicture {
+  display: inline;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
 .footerCTAButtons {
+  margin-block-start: 2rem;
+  margin-block-end: 2rem;
   display: flex;
   gap: 1rem;
 }

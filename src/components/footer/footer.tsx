@@ -6,6 +6,7 @@ import { Copyright } from "../copyright/copyright";
 import { Socials } from "../socials/socials";
 import { Button } from "../button/button";
 import { Time } from "../time/time";
+import Image from "next/image";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,6 @@ export const Footer = () => {
   // 0.9 or 1 here must match css variable: --footer-height/--footer-container-height else scroll won't match up
   // make circle the same background as the previous section
   // look for footer inspo online...
-  // maybe cool to have massive <Copyright> component be full screen width?
   // maybe don't need footer to be 100vh???
   const circleHeight = useTransform(scrollYProgress, [0, 1], [50, 0]);
 
@@ -33,9 +33,17 @@ export const Footer = () => {
       <div className={styles.footerClipPathContainer}>
         <footer className={styles.footer}>
           <div className={styles.footerCTA}>
-            <h1>
-              Let's Work<br></br>Together
-            </h1>
+            <div className={styles.footerCTAPictureContainer}>
+              <Image
+                src={"/images/drone.jpg"}
+                alt="Nicolas profile picture"
+                height={80}
+                width={80}
+                className={styles.profilePicture}
+              />
+              <h1>Let's Work</h1>
+            </div>
+            <h1>Together</h1>
             <div className={styles.footerCTAButtons}>
               <a href="mailto:nicolas.buisson@mail.mcgill.ca">
                 <Button>nicolas.buisson@mail.mcgill.ca</Button>
