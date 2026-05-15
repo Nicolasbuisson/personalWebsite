@@ -2,20 +2,22 @@
 import styles from "./description.module.css";
 import { useInView, motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Button } from "../button/button";
+import Link from "next/link";
 
 export const Description = () => {
   const text =
     "Helping brands stand out in the digital era. Together, we will build a unique solution to reflect your vision.";
 
   const description = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(description, { margin: "-200px" });
+  const isInView = useInView(description, { margin: "-150px", once: true });
 
   const { scrollYProgress } = useScroll({
     target: description,
     offset: ["start end", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["100%", "-100%"]);
+  const y = useTransform(scrollYProgress, [0, 1], ["70%", "-70%"]);
 
   const opacity = {
     initial: {
@@ -76,8 +78,12 @@ export const Description = () => {
             unique custom solutions enabling my clients to{" "}
             <span className={styles.textGradient}>be memorable</span>.
           </motion.p>
-          <motion.div style={{ y }} className={styles.button}>
-            <p>About me</p>
+          <motion.div style={{ y }}>
+            <Link href="/about">
+              <Button className={styles.button}>
+                <p>About me</p>
+              </Button>
+            </Link>
           </motion.div>
         </div>
       </div>
