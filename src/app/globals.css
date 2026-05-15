@@ -77,7 +77,8 @@ body {
   --clr-text: #000000;
   --clr-heading: hsl(18, 65%, 48%);
   --clr-accent: rgb(122, 33, 33);
-  --clr-accent-gradient-start: #1f2fcc;
+  --clr-accent-gradient-start: rgb(104, 32, 32);
+  --clr-accent-gradient-end: rgb(165, 13, 13);
   --clr-yellow-sun: #d69e2e;
   --clr-blue-moon-border: #dbeafe;
   --clr-blue-moon-fill: #63b3ed;
@@ -89,8 +90,9 @@ body {
     --clr-card-bg: hsl(173, 30%, 10%);
     --clr-text: #cbd5e1;
     --clr-heading: hsl(173, 50%, 70%);
-    --clr-accent: #2b45ff;
-    --clr-accent-gradient-start: #1f2fcc;
+    --clr-accent: rgb(122, 33, 33);
+    --clr-accent-gradient-start: rgb(104, 32, 32);
+    --clr-accent-gradient-end: rgb(165, 13, 13);
   }
 }
 

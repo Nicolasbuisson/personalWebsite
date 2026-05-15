@@ -1,0 +1,62 @@
+.body {
+  display: flex;
+  gap: 50px;
+}
+
+.body p {
+  font-size: var(--fs-h2);
+  gap: 8px;
+  line-height: 1.3;
+}
+
+.body p span {
+  margin-right: 3px;
+}
+
+.body p .mask {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+}
+
+.textGradient {
+  font-weight: 700;
+  background: linear-gradient(
+    90deg,
+    var(--clr-accent-gradient-start),
+    var(--clr-accent-gradient-end) 50%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aboutMeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.aboutMeContainer p {
+  text-wrap: pretty;
+  font-size: var(--fs-h4);
+  font-weight: 300;
+}
+
+.button {
+  width: 180px;
+  aspect-ratio: 1;
+  background-color: var(--clr-dark);
+  color: var(--clr-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.button p {
+  font-size: 16px;
+  font-weight: 500;
+}
