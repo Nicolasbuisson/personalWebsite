@@ -7,6 +7,7 @@ import { Socials } from "../socials/socials";
 import { Button } from "../button/button";
 import { Time } from "../time/time";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -62,10 +63,10 @@ export const Footer = () => {
             <div className={styles.footerContentColumn}>
               <h4>Navigation</h4>
               <div className={styles.footerNav}>
-                <a href="/">Home</a>
-                <a href="/work">Work</a>
-                <a href="/about">About</a>
-                <a href="/contact">Contact</a>
+                <Link href="/">Home</Link>
+                <Link href="/work">Work</Link>
+                <Link href="/about">About</Link>
+                <Link href="/contact">Contact</Link>
               </div>
             </div>
             <div className={styles.footerContentColumn}>
