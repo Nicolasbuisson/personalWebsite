@@ -1,7 +1,12 @@
+.workPage {
+  background-color: burlywood;
+}
+
 .projectGalleryContainer {
   --project-gallery-padding-block: 4rem;
   --project-gallery-padding-inline: 10rem;
 
+  background-color: var(--clr-white);
   padding-block: var(--project-gallery-padding-block);
   padding-inline: var(--project-gallery-padding-inline);
 }
