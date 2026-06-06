@@ -1,7 +1,7 @@
 import styles from "./nav.module.css";
 import { useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { Curve } from "./curve/curve";
 import { NavLink } from "./link/link";
 
@@ -39,7 +39,8 @@ interface IProps {
 
 export const Nav = (props: IProps) => {
   const { framerMotionExitAnimKey } = props;
-  const pathname = usePathname();
+  const router = useRouter();
+  const pathname = router.route;
   const [selectedIndicator, setSelectedIndicator] = useState(pathname);
 
   return (

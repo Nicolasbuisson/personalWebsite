@@ -2,7 +2,7 @@
 import styles from "./curve.module.css";
 import { ReactNode, useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 const text: Variants = {
   initial: {
@@ -68,7 +68,7 @@ export const Curve = ({
   children?: ReactNode;
   backgroundColor?: string;
 }) => {
-  const pathName = usePathname();
+  const router = useRouter();
   const [dimensions, setDimensions] = useState<{
     width: number;
     height: number;
@@ -113,7 +113,7 @@ export const Curve = ({
         animate="enter"
         exit="exit"
       >
-        {routes[pathName]}
+        {routes[router.route]}
       </motion.p>
       {dimensions.width !== 0 && <SVG {...dimensions} />}
       {children}
