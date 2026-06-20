@@ -1,6 +1,6 @@
 "use client";
 import styles from "./curve.module.css";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 
@@ -63,7 +63,7 @@ const routes: { [key: string]: string } = {
 
 export const Curve = ({
   children,
-  backgroundColor = "var(--clr-dark)",
+  backgroundColor = "var(--clr-dark)", // bug here
 }: {
   children?: ReactNode;
   backgroundColor?: string;
@@ -122,21 +122,14 @@ export const Curve = ({
 };
 
 const SVG = ({ height, width }: { height: number; width: number }) => {
-  const initialPath = `
-        M0 300 
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height + 300}
-        Q${width / 2} ${height + 600} 0 ${height + 300}
-        L0 0
-    `;
-
-  const targetPath = `
-        M0 300
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height}
-        Q${width / 2} ${height} 0 ${height}
-        L0 0
-    `;
+  const pathVariants = useMemo(
+    () =>
+      curve(
+        `M0 300 Q${width / 2} 0 ${width} 300 L${width} ${height + 300} Q${width / 2} ${height + 600} 0 ${height + 300} L0 0`,
+        `M0 300 Q${width / 2} 0 ${width} 300 L${width} ${height} Q${width / 2} ${height} 0 ${height} L0 0`,
+      ),
+    [width, height],
+  );
 
   return (
     <motion.svg
@@ -146,7 +139,7 @@ const SVG = ({ height, width }: { height: number; width: number }) => {
       exit="exit"
     >
       <motion.path
-        variants={curve(initialPath, targetPath)}
+        variants={pathVariants}
         initial="initial"
         animate="enter"
         exit="exit"

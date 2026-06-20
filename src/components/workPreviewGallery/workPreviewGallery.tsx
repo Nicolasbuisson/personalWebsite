@@ -3,6 +3,7 @@ import styles from "./workPreviewGallery.module.css";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { WorkPreviewDetails } from "../workPreviewDetails/workPreviewDetails";
+import { EXIT_INSTANTLY } from "@/utils/motion";
 
 interface IWorkPreviewGalleryProps {
   backgroundImageUrl: string;
@@ -43,7 +44,11 @@ export const WorkPreviewGallery = (props: IWorkPreviewGalleryProps) => {
           websiteUrl={websiteUrl}
         />
       </div>
-      <motion.div className={styles.vignette} style={{ x, y }}>
+      <motion.div
+        className={styles.vignette}
+        style={{ x, y }}
+        exit={EXIT_INSTANTLY}
+      >
         <Image src={vignetteImageUrl} alt={"Vignette for " + alt} fill />
       </motion.div>
     </div>

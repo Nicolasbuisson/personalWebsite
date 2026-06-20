@@ -1,18 +1,23 @@
 import styles from "./curve.module.css";
+import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 
-export const Curve = () => {
-  const initialPath = `M100 0 L200 0 L200 ${window.innerHeight} L100 ${window.innerHeight} Q-100 ${window.innerHeight / 2} 100 0`;
-  const targetPath = `M100 0 L200 0 L200 ${window.innerHeight} L100 ${window.innerHeight} Q100 ${window.innerHeight / 2} 100 0`;
+export const Curve = ({ isOpen }: { isOpen: boolean }) => {
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setHeight(window.innerHeight);
+  }, []);
+
+  if (height === 0) return null;
+
+  const initialPath = `M100 0 L200 0 L200 ${height} L100 ${height} Q-100 ${height / 2} 100 0`;
+  const targetPath = `M100 0 L200 0 L200 ${height} L100 ${height} Q100 ${height / 2} 100 0`;
 
   const curve: Variants = {
-    initial: {
-      d: initialPath,
-    },
     enter: {
       d: targetPath,
       transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
-      // here ease is wrong type...?
     },
     exit: {
       d: initialPath,
@@ -24,10 +29,9 @@ export const Curve = () => {
     <svg className={styles.svgCurve}>
       <motion.path
         variants={curve}
-        initial="initial"
-        animate="enter"
-        exit="exit"
-      ></motion.path>
+        initial={false}
+        animate={isOpen ? "enter" : "exit"}
+      />
     </svg>
   );
 };

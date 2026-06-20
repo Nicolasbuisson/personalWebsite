@@ -17,11 +17,6 @@ const geistMono = Geist_Mono({
 
 export default function About() {
   return (
-    // problem is Header component...
-    // if we remove it, the page transitions works flawlessly
-    // but if we keep it, it messes it up and exit animation does not play properly
-    // CHECK HOW CHILDREN WORKS...
-    // might need to wrap the immediate motion.div with the AnimatePresence instead of the whole page?
     <>
       <Head>
         <title>Nicolas Buisson - About</title>
@@ -33,10 +28,9 @@ export default function About() {
         <div
           className={`${styles.aboutPage} ${geistSans.variable} ${geistMono.variable}`}
         >
-          {/* <div className={styles.headerContainer}>
+          <div className={styles.headerContainer}>
             <Header />
-          </div> */}
-
+          </div>
           <h2>About page</h2>
           <Link href="/">Home</Link>
           <Link href="/work">Work</Link>

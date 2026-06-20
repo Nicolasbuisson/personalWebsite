@@ -8,6 +8,7 @@ import { Button } from "../button/button";
 import { Time } from "../time/time";
 import Image from "next/image";
 import Link from "next/link";
+import { EXIT_INSTANTLY } from "@/utils/motion";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -22,12 +23,15 @@ export const Footer = () => {
   // look for footer inspo online...
   // maybe don't need footer to be 100vh???
   const circleHeight = useTransform(scrollYProgress, [0, 1], [50, 0]);
-
+  // Dennis has a button that leads to contact page, which then shows a form...
+  // probably want to do the same
+  // create codebynico email address after buying the domain: info@codebynico.ca?
   return (
     <div className={styles.footerContainer} ref={footerContainerRef}>
       <motion.div
         style={{ height: circleHeight }}
         className={styles.footerCircleContainer}
+        exit={EXIT_INSTANTLY}
       >
         <div className={styles.footerCircle}></div>
       </motion.div>

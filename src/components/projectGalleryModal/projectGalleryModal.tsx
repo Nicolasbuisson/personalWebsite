@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
+import { EXIT_INSTANTLY } from "@/utils/motion";
 
 interface IProjectGalleryModalProps {
   modalState: ModalState;
@@ -79,6 +80,7 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
         variants={scaleAnimation}
         initial="initial"
         animate={active ? "open" : "closed"}
+        exit={EXIT_INSTANTLY}
       >
         <div className={styles.modalSlider} style={{ top: `${index * -100}%` }}>
           {projects.map((project, index) => {
@@ -105,6 +107,7 @@ export const ProjectGalleryModal = (props: IProjectGalleryModalProps) => {
         variants={scaleAnimation}
         initial="initial"
         animate={active ? "open" : "closed"}
+        exit={EXIT_INSTANTLY}
       >
         View
       </motion.div>

@@ -4,6 +4,7 @@ import { useInView, motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "../button/button";
 import Link from "next/link";
+import { EXIT_INSTANTLY } from "@/utils/motion";
 
 export const Description = () => {
   const text =
@@ -56,6 +57,7 @@ export const Description = () => {
                   variants={slideUp}
                   custom={index}
                   animate={isInView ? "open" : "closed"}
+                  exit={EXIT_INSTANTLY}
                   className={
                     word === "stand" ||
                     word === "out" ||
@@ -73,12 +75,16 @@ export const Description = () => {
         </p>
 
         <div className={styles.aboutMeContainer}>
-          <motion.p variants={opacity} animate={isInView ? "open" : "closed"}>
+          <motion.p
+            variants={opacity}
+            animate={isInView ? "open" : "closed"}
+            exit={EXIT_INSTANTLY}
+          >
             The combination of my passion for code & design allows me to create
             unique custom solutions enabling my clients to{" "}
             <span className={styles.textGradient}>be memorable</span>.
           </motion.p>
-          <motion.div style={{ y }}>
+          <motion.div style={{ y }} exit={EXIT_INSTANTLY}>
             <Link href="/about">
               <Button className={styles.button}>
                 <p>About me</p>
