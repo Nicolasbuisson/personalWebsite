@@ -36,57 +36,59 @@ export const Footer = () => {
         <div className={styles.footerCircle}></div>
       </motion.div>
       <div className={styles.footerClipPathContainer}>
-        <footer className={styles.footer}>
-          <div className={styles.footerCTA}>
-            <div className={styles.footerCTAPictureContainer}>
-              <Image
-                src={"/images/drone.jpg"}
-                alt="Nicolas profile picture"
-                height={80}
-                width={80}
-                className={styles.profilePicture}
-              />
-              <h1>Let's Work</h1>
-            </div>
-            <h1>Together</h1>
-            <div className={styles.footerCTAButtons}>
-              <a href="mailto:nicolas.buisson@mail.mcgill.ca">
-                <Button>nicolas.buisson@mail.mcgill.ca</Button>
-              </a>
-              <a href="tel:+15146499611">
-                <Button>+1 514-649-9611</Button>
-              </a>
-            </div>
-          </div>
-          <hr className={styles.footerLine} />
-          <div className={styles.copyrightContainer}>
-            <Copyright fullScreenWidth />
-          </div>
-          <hr className={styles.footerLine} />
-          <div className={styles.footerContent}>
-            <div className={styles.footerContentColumn}>
-              <h4>Navigation</h4>
-              <div className={styles.footerNav}>
-                <Link href="/">Home</Link>
-                <Link href="/work">Work</Link>
-                <Link href="/about">About</Link>
-                <Link href="/contact">Contact</Link>
+        <div className={styles.footerStickyContainer}>
+          <footer className={styles.footerSticky}>
+            <div className={styles.footerCTA}>
+              <div className={styles.footerCTAPictureContainer}>
+                <Image
+                  src={"/images/drone.jpg"}
+                  alt="Nicolas profile picture"
+                  height={80}
+                  width={80}
+                  className={styles.profilePicture}
+                />
+                <h1>Let's Work</h1>
+              </div>
+              <h1>Together</h1>
+              <div className={styles.footerCTAButtons}>
+                <a href="mailto:nicolas.buisson@mail.mcgill.ca">
+                  <Button>nicolas.buisson@mail.mcgill.ca</Button>
+                </a>
+                <a href="tel:+15146499611">
+                  <Button>+1 514-649-9611</Button>
+                </a>
               </div>
             </div>
-            <div className={styles.footerContentColumn}>
-              <h4>Based in</h4>
-              <div>Montreal, Canada</div>
+            <hr className={styles.footerLine} />
+            <div className={styles.copyrightContainer}>
+              <Copyright fullScreenWidth />
             </div>
-            <div className={styles.footerContentColumn}>
-              <h4>Local time</h4>
-              <Time />
+            <hr className={styles.footerLine} />
+            <div className={styles.footerContent}>
+              <div className={styles.footerContentColumn}>
+                <h4>Navigation</h4>
+                <div className={styles.footerNav}>
+                  <Link href="/">Home</Link>
+                  <Link href="/work">Work</Link>
+                  <Link href="/about">About</Link>
+                  <Link href="/contact">Contact</Link>
+                </div>
+              </div>
+              <div className={styles.footerContentColumn}>
+                <h4>Based in</h4>
+                <div>Montreal, Canada</div>
+              </div>
+              <div className={styles.footerContentColumn}>
+                <h4>Local time</h4>
+                <Time />
+              </div>
+              <div className={styles.footerContentColumn}>
+                <h4>Socials</h4>
+                <Socials />
+              </div>
             </div>
-            <div className={styles.footerContentColumn}>
-              <h4>Socials</h4>
-              <Socials />
-            </div>
-          </div>
-        </footer>
+          </footer>
+        </div>
       </div>
     </div>
   );

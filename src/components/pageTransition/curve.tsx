@@ -37,22 +37,27 @@ const curve = (initialPath: string, targetPath: string): Variants => {
   };
 };
 
-const translate: Variants = {
+// Animate the layer with `y` (transform/compositor) instead of `top` (layout/paint).
+// `top` on this >viewport-sized fixed layer forces a full re-layout + repaint every
+// frame and lets Chromium drop stale raster tiles ("frozen frame") onto the
+// transform-promoted Header/Nav/Footer siblings. Pixel values are derived from the
+// viewport height we already track: -100vh === -height, 100vh === height.
+const translate = (height: number): Variants => ({
   initial: {
-    top: "-300px",
+    y: -300,
   },
   enter: {
-    top: "-100vh",
+    y: -height,
     transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
     transitionEnd: {
-      top: "100vh",
+      y: height,
     },
   },
   exit: {
-    top: "-300px",
+    y: -300,
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
-};
+});
 
 const routes: { [key: string]: string } = {
   "/": "Home",
@@ -131,9 +136,12 @@ const SVG = ({ height, width }: { height: number; width: number }) => {
     [width, height],
   );
 
+  const translateVariants = useMemo(() => translate(height), [height]);
+
   return (
     <motion.svg
-      variants={translate}
+      className={styles.pageTransitionSVG}
+      variants={translateVariants}
       initial="initial"
       animate="enter"
       exit="exit"

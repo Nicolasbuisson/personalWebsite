@@ -1,7 +1,8 @@
 .footerContainer {
-  --footer-container-height: 100vh;
   --footer-svg-height: 10vh;
-  --footer-height: 90vh;
+  /* The footer's own content height. Used as the clip "window" and the
+     sticky element height. Tune this to the footer's real rendered height. */
+  --footer-height: 100vh;
 
   --footer-content-subtitle-margin-block-end: 0.25rem;
   --footer-content-icon-offset: 12px;
@@ -29,7 +30,7 @@
 
 .footerClipPathContainer {
   position: relative;
-  height: var(--footer-container-height);
+  height: var(--footer-height);
   clip-path: polygon(0% 0, 100% 0%, 100% 100%, 0 100%);
   width: 100%;
 }
@@ -40,7 +41,19 @@
   so will always be under everything else which could cause issues potentially */
   bottom: 0;
   width: 100%;
-  height: var(--footer-container-height);
+  height: var(--footer-height);
+}
+
+.footerStickyContainer {
+  position: relative;
+  height: calc(100vh + var(--footer-height));
+  top: -100vh;
+}
+
+.footerSticky {
+  position: sticky;
+  height: var(--footer-height);
+  top: calc(100vh - var(--footer-height));
 }
 
 .footerCTA {
