@@ -1,8 +1,8 @@
 "use client";
 import styles from "./curve.module.css";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 
 const text: Variants = {
   initial: {
@@ -37,22 +37,27 @@ const curve = (initialPath: string, targetPath: string): Variants => {
   };
 };
 
-const translate: Variants = {
+// Animate the layer with `y` (transform/compositor) instead of `top` (layout/paint).
+// `top` on this >viewport-sized fixed layer forces a full re-layout + repaint every
+// frame and lets Chromium drop stale raster tiles ("frozen frame") onto the
+// transform-promoted Header/Nav/Footer siblings. Pixel values are derived from the
+// viewport height we already track: -100vh === -height, 100vh === height.
+const translate = (height: number): Variants => ({
   initial: {
-    top: "-300px",
+    y: -300,
   },
   enter: {
-    top: "-100vh",
+    y: -height,
     transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
     transitionEnd: {
-      top: "100vh",
+      y: height,
     },
   },
   exit: {
-    top: "-300px",
+    y: -300,
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
-};
+});
 
 const routes: { [key: string]: string } = {
   "/": "Home",
@@ -63,12 +68,12 @@ const routes: { [key: string]: string } = {
 
 export const Curve = ({
   children,
-  backgroundColor = "var(--clr-dark)",
+  backgroundColor = "var(--clr-dark)", // bug here
 }: {
   children?: ReactNode;
   backgroundColor?: string;
 }) => {
-  const pathName = usePathname();
+  const router = useRouter();
   const [dimensions, setDimensions] = useState<{
     width: number;
     height: number;
@@ -113,7 +118,7 @@ export const Curve = ({
         animate="enter"
         exit="exit"
       >
-        {routes[pathName]}
+        {routes[router.route]}
       </motion.p>
       {dimensions.width !== 0 && <SVG {...dimensions} />}
       {children}
@@ -122,31 +127,27 @@ export const Curve = ({
 };
 
 const SVG = ({ height, width }: { height: number; width: number }) => {
-  const initialPath = `
-        M0 300 
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height + 300}
-        Q${width / 2} ${height + 600} 0 ${height + 300}
-        L0 0
-    `;
+  const pathVariants = useMemo(
+    () =>
+      curve(
+        `M0 300 Q${width / 2} 0 ${width} 300 L${width} ${height + 300} Q${width / 2} ${height + 600} 0 ${height + 300} L0 0`,
+        `M0 300 Q${width / 2} 0 ${width} 300 L${width} ${height} Q${width / 2} ${height} 0 ${height} L0 0`,
+      ),
+    [width, height],
+  );
 
-  const targetPath = `
-        M0 300
-        Q${width / 2} 0 ${width} 300
-        L${width} ${height}
-        Q${width / 2} ${height} 0 ${height}
-        L0 0
-    `;
+  const translateVariants = useMemo(() => translate(height), [height]);
 
   return (
     <motion.svg
-      variants={translate}
+      className={styles.pageTransitionSVG}
+      variants={translateVariants}
       initial="initial"
       animate="enter"
       exit="exit"
     >
       <motion.path
-        variants={curve(initialPath, targetPath)}
+        variants={pathVariants}
         initial="initial"
         animate="enter"
         exit="exit"

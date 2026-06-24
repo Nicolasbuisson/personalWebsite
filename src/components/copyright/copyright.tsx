@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./copyright.module.css";
 
 interface ICopyrightProps {
@@ -7,7 +8,7 @@ interface ICopyrightProps {
 export const Copyright = (props: ICopyrightProps) => {
   const { fullScreenWidth = false } = props;
   return (
-    <a
+    <Link
       href="/"
       className={`${styles.logo} ${fullScreenWidth ? styles.fullScreenWidth : ""}`}
     >
@@ -17,6 +18,6 @@ export const Copyright = (props: ICopyrightProps) => {
         <p className={styles.nico}>Nico</p>
         <p className={styles.buisson}>las Buisson</p>
       </div>
-    </a>
+    </Link>
   );
 };

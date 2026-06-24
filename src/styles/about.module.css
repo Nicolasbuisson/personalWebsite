@@ -1,0 +1,18 @@
+.aboutPage {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+
+  background-color: var(--clr-white);
+  color: var(--clr-dark);
+}
+
+.aboutPage h2 {
+  margin-top: 4rem;
+}
+
+.headerContainer {
+  width: 100%;
+  background-color: var(--clr-dark);
+}

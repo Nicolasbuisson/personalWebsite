@@ -1,9 +1,12 @@
 import styles from "./nav.module.css";
 import { useState } from "react";
 import { motion, Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
 import { Curve } from "./curve/curve";
 import { NavLink } from "./link/link";
+import { ThemeButton } from "@/components/themeButton/themeButton";
+// want to add the theme here? does the website need a theme?
+// might as well show off
 
 const navItems = [
   {
@@ -34,21 +37,19 @@ const menuSlide: Variants = {
 };
 
 interface IProps {
-  framerMotionExitAnimKey: string;
+  isOpen: boolean;
 }
 
-export const Nav = (props: IProps) => {
-  const { framerMotionExitAnimKey } = props;
-  const pathname = usePathname();
+export const Nav = ({ isOpen }: IProps) => {
+  const router = useRouter();
+  const pathname = router.route;
   const [selectedIndicator, setSelectedIndicator] = useState(pathname);
 
   return (
     <motion.div
-      key={framerMotionExitAnimKey}
       variants={menuSlide}
-      initial="initial"
-      animate="enter"
-      exit="exit"
+      initial={false}
+      animate={isOpen ? "enter" : "exit"}
       className={styles.menu}
     >
       <div className={styles.body}>
@@ -65,16 +66,16 @@ export const Nav = (props: IProps) => {
             return (
               <NavLink
                 key={index}
-                framerMotionExitAnimationKey={`navlink-${data.title}`}
                 data={{ ...data, index }}
                 isActive={selectedIndicator == data.href}
+                isOpen={isOpen}
                 setSelectedIndicator={setSelectedIndicator}
-              ></NavLink>
+              />
             );
           })}
         </div>
       </div>
-      <Curve />
+      <Curve isOpen={isOpen} />
     </motion.div>
   );
 };

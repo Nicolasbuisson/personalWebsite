@@ -1,4 +1,4 @@
-.curve svg,
+.curve .pageTransitionSVG,
 .curve .background {
   z-index: 1000;
   position: fixed;
@@ -10,7 +10,7 @@
   top: 0;
 }
 
-.curve svg path {
+.curve .pageTransitionSVG path {
   fill: var(--clr-dark);
 }
 

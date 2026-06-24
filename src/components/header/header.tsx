@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styles from "./header.module.css";
-import { AnimatePresence } from "framer-motion";
 import { Nav } from "../nav/nav";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -103,11 +102,7 @@ export const Header = () => {
           ></div>
         </div>
       </div>
-      <AnimatePresence mode="wait">
-        {isOpen && (
-          <Nav framerMotionExitAnimKey="key-to-animate-exit-transition-framer" />
-        )}
-      </AnimatePresence>
+      <Nav isOpen={isOpen} />
       <nav className={styles.nav}>
         <Copyright />
         <li className={styles.menuLabel}>

@@ -7,4 +7,5 @@
   padding-block: calc(1.5 * var(--section-padding-block));
   display: flex;
   justify-content: center;
+  background-color: var(--clr-white);
 }
