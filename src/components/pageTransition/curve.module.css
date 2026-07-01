@@ -22,11 +22,10 @@
 
 .route {
   z-index: 1002;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 40%;
   color: white;
   font-size: 46px;
-  transform: translateX(-50%);
   text-align: center;
 }

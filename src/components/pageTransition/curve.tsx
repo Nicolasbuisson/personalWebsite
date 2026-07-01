@@ -4,21 +4,39 @@ import { ReactNode, useEffect, useMemo, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
 
-const text: Variants = {
-  initial: {
-    opacity: 1,
-  },
-  enter: {
-    opacity: 0,
-    top: -100,
-    transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
-    transitionEnd: { top: "47.5%" },
-  },
-  exit: {
-    opacity: 1,
-    top: "40%",
-    transition: { duration: 0.5, delay: 0.4, ease: [0.33, 1, 0.68, 1] },
-  },
+// Animate `y` (compositor) instead of `top` (layout/paint), matching the SVG
+// layer. `.route` is now `position: fixed` with a static `top: 40%`, so the base
+// position is viewport-anchored and the transform just offsets from there.
+// `x: "-50%"` keeps the horizontal centering since motion owns the transform now.
+const text = (height: number): Variants => {
+  // How far below its resting spot the label starts its exit. A fraction of the
+  // viewport height so it scales across screen sizes; bump toward `height` for a
+  // bigger sweep, lower it for a subtler lift.
+  const lift = height * 0.15;
+
+  return {
+    initial: {
+      opacity: 1,
+      x: "-50%",
+      y: 0,
+    },
+    enter: {
+      opacity: 0,
+      x: "-50%",
+      y: -400, // must do a hardcoded value, because on enter, page dimensions.height will be 0 on SSR
+      transition: { duration: 0.75, delay: 0.35, ease: [0.76, 0, 0.24, 1] },
+      transitionEnd: { y: 0 },
+    },
+    // Keyframe array forces the start point: slide up from `lift` (below) to y:0
+    // regardless of where the label was parked, so it lands ready for the next
+    // enter. It fades in (opacity 0 -> 1) as it rises, mirroring the curtain.
+    exit: {
+      opacity: 1,
+      x: "-50%",
+      y: [lift, 0],
+      transition: { duration: 0.5, delay: 0.4, ease: [0.33, 1, 0.68, 1] },
+    },
+  };
 };
 
 const curve = (initialPath: string, targetPath: string): Variants => {
@@ -68,7 +86,7 @@ const routes: { [key: string]: string } = {
 
 export const Curve = ({
   children,
-  backgroundColor = "var(--clr-dark)", // bug here
+  backgroundColor = "var(--clr-dark)",
 }: {
   children?: ReactNode;
   backgroundColor?: string;
@@ -96,6 +114,8 @@ export const Curve = ({
     };
   }, []);
 
+  const textVariants = useMemo(() => text(dimensions.height), [dimensions]);
+
   return (
     <div className={styles.curve} style={{ backgroundColor }}>
       <div
@@ -105,15 +125,10 @@ export const Curve = ({
             : { zIndex: -1, opacity: 0 }
         }
         className={styles.background}
-        // could add this for cleanup
-        // Clean up from DOM when animation ends
-        //element.addEventListener("animationend", () => {
-        //  element.remove();
-        //});
       />
       <motion.p
         className={styles.route}
-        variants={text}
+        variants={textVariants}
         initial="initial"
         animate="enter"
         exit="exit"
