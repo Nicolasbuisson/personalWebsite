@@ -77,6 +77,20 @@ const translate = (height: number): Variants => ({
   },
 });
 
+const translateContent: Variants = {
+  initial: {
+    y: 300,
+  },
+  enter: {
+    y: 0,
+    transition: {
+      duration: 0.75,
+      delay: 0.35,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
 const routes: { [key: string]: string } = {
   "/": "Home",
   "/work": "Work",
@@ -136,7 +150,9 @@ export const Curve = ({
         {routes[router.route]}
       </motion.p>
       {dimensions.width !== 0 && <SVG {...dimensions} />}
-      {children}
+      <motion.div variants={translateContent} initial="initial" animate="enter">
+        {children}
+      </motion.div>
     </div>
   );
 };
