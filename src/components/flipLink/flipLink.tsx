@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import styles from "./flipLink.module.css";
-import { EXIT_INSTANTLY } from "@/utils/motion";
+import { delayScrollToTop, EXIT_INSTANTLY } from "@/utils/motion";
 import { useRouter } from "next/router";
 import { MouseEvent } from "react";
 
@@ -29,7 +29,8 @@ export const FlipLink = (props: FlipLinkProps) => {
       e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0;
     if (isModifiedClick) return;
     e.preventDefault();
-    router.push(href);
+    router.push(href, undefined, { scroll: false });
+    delayScrollToTop(e);
   };
 
   return href ? (

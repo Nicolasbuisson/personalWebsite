@@ -7,8 +7,8 @@ import { Socials } from "../socials/socials";
 import { Button } from "../button/button";
 import { Time } from "../time/time";
 import Image from "next/image";
-import Link from "next/link";
 import { EXIT_INSTANTLY } from "@/utils/motion";
+import { PageTransitionLink } from "../pageTransition/pageTransitionLink";
 
 export const Footer = () => {
   const footerContainerRef = useRef<HTMLDivElement>(null);
@@ -68,10 +68,12 @@ export const Footer = () => {
               <div className={styles.footerContentColumn}>
                 <h4>Navigation</h4>
                 <div className={styles.footerNav}>
-                  <Link href="/">Home</Link>
-                  <Link href="/work">Work</Link>
-                  <Link href="/about">About</Link>
-                  <Link href="/contact">Contact</Link>
+                  <PageTransitionLink href="/">Home</PageTransitionLink>
+                  <PageTransitionLink href="/work">Work</PageTransitionLink>
+                  <PageTransitionLink href="/about">About</PageTransitionLink>
+                  <PageTransitionLink href="/contact">
+                    Contact
+                  </PageTransitionLink>
                 </div>
               </div>
               <div className={styles.footerContentColumn}>
