@@ -1,5 +1,5 @@
-import Link from "next/link";
 import styles from "./copyright.module.css";
+import { PageTransitionLink } from "../pageTransition/pageTransitionLink";
 
 interface ICopyrightProps {
   fullScreenWidth?: boolean;
@@ -8,7 +8,7 @@ interface ICopyrightProps {
 export const Copyright = (props: ICopyrightProps) => {
   const { fullScreenWidth = false } = props;
   return (
-    <Link
+    <PageTransitionLink
       href="/"
       className={`${styles.logo} ${fullScreenWidth ? styles.fullScreenWidth : ""}`}
     >
@@ -18,6 +18,6 @@ export const Copyright = (props: ICopyrightProps) => {
         <p className={styles.nico}>Nico</p>
         <p className={styles.buisson}>las Buisson</p>
       </div>
-    </Link>
+    </PageTransitionLink>
   );
 };

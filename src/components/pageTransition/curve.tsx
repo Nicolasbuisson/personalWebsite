@@ -36,6 +36,14 @@ const text = (height: number): Variants => {
       y: [lift, 0],
       transition: { duration: 0.5, delay: 0.4, ease: [0.33, 1, 0.68, 1] },
     },
+    // Where `enter` leaves the label once its transitionEnd has run. Used as both
+    // initial and animate when the entry animation is skipped, so nothing moves
+    // but `exit` still has the same starting point it normally would.
+    settled: {
+      opacity: 0,
+      x: "-50%",
+      y: 0,
+    },
   };
 };
 
@@ -51,6 +59,9 @@ const curve = (initialPath: string, targetPath: string): Variants => {
     exit: {
       d: initialPath,
       transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
+    },
+    settled: {
+      d: targetPath,
     },
   };
 };
@@ -75,6 +86,11 @@ const translate = (height: number): Variants => ({
     y: -300,
     transition: { duration: 0.75, ease: [0.76, 0, 0.24, 1] },
   },
+  // Matches `enter`'s transitionEnd: parked a full viewport below, which is where
+  // `exit` expects to start its sweep back up.
+  settled: {
+    y: height,
+  },
 });
 
 const translateContent: Variants = {
@@ -89,6 +105,9 @@ const translateContent: Variants = {
       ease: [0.76, 0, 0.24, 1],
     },
   },
+  settled: {
+    y: 0,
+  },
 };
 
 const routes: { [key: string]: string } = {
@@ -101,9 +120,14 @@ const routes: { [key: string]: string } = {
 export const Curve = ({
   children,
   backgroundColor = "var(--clr-dark)",
+  skipEnter = false,
 }: {
   children?: ReactNode;
   backgroundColor?: string;
+  // Render straight into the post-enter resting state instead of animating in.
+  // Set on the page the preloader covered, so the two curtains don't compete.
+  // `exit` is unaffected either way.
+  skipEnter?: boolean;
 }) => {
   const router = useRouter();
   const [dimensions, setDimensions] = useState<{
@@ -130,6 +154,10 @@ export const Curve = ({
 
   const textVariants = useMemo(() => text(dimensions.height), [dimensions]);
 
+  // Identical initial and animate means framer-motion runs no transition at all.
+  const enterState = skipEnter ? "settled" : "enter";
+  const initialState = skipEnter ? "settled" : "initial";
+
   return (
     <div className={styles.curve} style={{ backgroundColor }}>
       <div
@@ -143,21 +171,33 @@ export const Curve = ({
       <motion.p
         className={styles.route}
         variants={textVariants}
-        initial="initial"
-        animate="enter"
+        initial={initialState}
+        animate={enterState}
         exit="exit"
       >
         {routes[router.route]}
       </motion.p>
-      {dimensions.width !== 0 && <SVG {...dimensions} />}
-      <motion.div variants={translateContent} initial="initial" animate="enter">
+      {dimensions.width !== 0 && <SVG {...dimensions} skipEnter={skipEnter} />}
+      <motion.div
+        variants={translateContent}
+        initial={initialState}
+        animate={enterState}
+      >
         {children}
       </motion.div>
     </div>
   );
 };
 
-const SVG = ({ height, width }: { height: number; width: number }) => {
+const SVG = ({
+  height,
+  width,
+  skipEnter,
+}: {
+  height: number;
+  width: number;
+  skipEnter: boolean;
+}) => {
   const pathVariants = useMemo(
     () =>
       curve(
@@ -169,18 +209,21 @@ const SVG = ({ height, width }: { height: number; width: number }) => {
 
   const translateVariants = useMemo(() => translate(height), [height]);
 
+  const enterState = skipEnter ? "settled" : "enter";
+  const initialState = skipEnter ? "settled" : "initial";
+
   return (
     <motion.svg
       className={styles.pageTransitionSVG}
       variants={translateVariants}
-      initial="initial"
-      animate="enter"
+      initial={initialState}
+      animate={enterState}
       exit="exit"
     >
       <motion.path
         variants={pathVariants}
-        initial="initial"
-        animate="enter"
+        initial={initialState}
+        animate={enterState}
         exit="exit"
       />
     </motion.svg>

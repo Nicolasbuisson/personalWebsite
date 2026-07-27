@@ -1,3 +1,4 @@
+"use client";
 import { Footer } from "@/components/footer/footer";
 import styles from "../styles/home.module.css";
 import { HomeHero } from "@/components/homeHero/homeHero";
@@ -17,7 +18,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function Home() {
+// `skipEnter` is injected by _app: true only on a hard load of "/", where the
+// preloader is already covering the screen and the Curve entry would compete
+// with it. Navigating back here from another page gets the normal animation.
+export default function Home({ skipEnter }: { skipEnter?: boolean }) {
   return (
     <>
       <Head>
@@ -26,7 +30,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Curve>
+      <Curve skipEnter={skipEnter}>
         <div
           className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
         >
