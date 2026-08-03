@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Preloader } from "@/components/preloader/preloader";
 
-const PRELOADER_DURATION = 2000;
+const PRELOADER_DURATION = 3200;
 
 export default function App({ Component, pageProps, router }: AppProps) {
   // need to add ReactLenis scroll component here? or in Document.tsx
