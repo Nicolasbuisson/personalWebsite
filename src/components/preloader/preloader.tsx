@@ -1,9 +1,10 @@
 "use client";
 import styles from "./preloader.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { motion, Variants } from "framer-motion";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
 gsap.registerPlugin(SplitText);
 
@@ -18,7 +19,8 @@ const slideUp: Variants = {
 };
 
 export const Preloader = () => {
-  const [dimension, setDimension] = useState({ width: 0, height: 0 });
+  const dimension = useWindowSize();
+  const isMeasured = dimension.width > 0;
 
   const copyrightRef = useRef<HTMLSpanElement>(null);
   const nameRef = useRef<HTMLSpanElement>(null);
@@ -26,10 +28,6 @@ export const Preloader = () => {
   const codeByRef = useRef<HTMLSpanElement>(null);
   const nicoRef = useRef<HTMLSpanElement>(null);
   const buissonRef = useRef<HTMLSpanElement>(null);
-
-  useEffect(() => {
-    setDimension({ width: window.innerWidth, height: window.innerHeight });
-  }, []);
 
   // The copyright span only mounts once dimension is measured, so the timeline
   // has to wait for that render instead of running on mount.
@@ -117,9 +115,9 @@ export const Preloader = () => {
       // leave the page stuck on the wait cursor.
       document.body.style.cursor = "";
     };
-  }, [dimension.width]);
+  }, [isMeasured]);
 
-  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height + 300} 0 ${dimension.height}  L0 0`;
+  const initialPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height + (dimension.width <= 500 ? 200 : 300)} 0 ${dimension.height}  L0 0`;
   const targetPath = `M0 0 L${dimension.width} 0 L${dimension.width} ${dimension.height} Q${dimension.width / 2} ${dimension.height} 0 ${dimension.height}  L0 0`;
 
   const curve: Variants = {
@@ -140,7 +138,7 @@ export const Preloader = () => {
       exit="exit"
       className={styles.introduction}
     >
-      {dimension.width > 0 && (
+      {isMeasured && (
         <>
           <p>
             <span

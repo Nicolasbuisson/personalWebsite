@@ -31,6 +31,12 @@
   z-index: 1;
 }
 
+@media (width <= 500px) {
+  .introduction p {
+    font-size: 32px;
+  }
+}
+
 .preloaderCopyrightSymbol {
   opacity: 0;
   transform: translateX(300);
