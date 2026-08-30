@@ -10,6 +10,7 @@ interface IWorkPreviewGalleryProps {
   alt: string;
   vignetteImageUrl: string;
   mousePosition: { x: MotionValue<number>; y: MotionValue<number> };
+  isVignetteVisible: boolean;
   client: string;
   location: string;
   description: string;
@@ -23,6 +24,7 @@ export const WorkPreviewGallery = (props: IWorkPreviewGalleryProps) => {
     alt,
     vignetteImageUrl,
     mousePosition,
+    isVignetteVisible,
     client,
     location,
     description,
@@ -47,6 +49,8 @@ export const WorkPreviewGallery = (props: IWorkPreviewGalleryProps) => {
       <motion.div
         className={styles.vignette}
         style={{ x, y }}
+        animate={{ opacity: isVignetteVisible ? 1 : 0 }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
         exit={EXIT_INSTANTLY}
       >
         <Image src={vignetteImageUrl} alt={"Vignette for " + alt} fill />

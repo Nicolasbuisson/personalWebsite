@@ -2,6 +2,7 @@
 import styles from "./workPreview.module.css";
 import { WorkPreviewGallery } from "../workPreviewGallery/workPreviewGallery";
 import { useSpring } from "motion/react";
+import { useState } from "react";
 
 export const WorkPreview = () => {
   // do each work section full screen width and height + add some glassmorphism cards on top for description
@@ -19,21 +20,29 @@ export const WorkPreview = () => {
     y: useSpring(0, springAttributes),
   };
 
+  const [isVignetteVisible, setIsVignetteVisible] = useState(false);
+
   const mouseMove = (e: any) => {
     const { clientX, clientY } = e;
-    const targetX = clientX - (window.innerWidth * 0.25) / 2; // because vignette width is 0.25vw?
-    const targetY = clientY - (window.innerHeight * 0.3) / 2; // because vignette height is 0.3vw?
+    const targetX = clientX - (window.innerWidth * 0.25) / 2; // because vignette width is 0.25vw? check size responsivness?
+    const targetY = clientY - (window.innerHeight * 0.6) / 2; // because vignette height is 0.3vw?
     mousePosition.x.set(targetX);
     mousePosition.y.set(targetY);
   };
 
   return (
-    <section className={styles.workPreviewSection} onMouseMove={mouseMove}>
+    <section
+      className={styles.workPreviewSection}
+      onMouseMove={mouseMove}
+      onMouseEnter={() => setIsVignetteVisible(true)}
+      onMouseLeave={() => setIsVignetteVisible(false)}
+    >
       <WorkPreviewGallery
         backgroundImageUrl={"/images/palmTrees.jpg"}
         alt={""}
         vignetteImageUrl="/images/wine.jpg"
         mousePosition={mousePosition}
+        isVignetteVisible={isVignetteVisible}
         client="Alexon Media"
         location="Dubai, UAE"
         description="company website"
@@ -45,6 +54,7 @@ export const WorkPreview = () => {
         alt={""}
         vignetteImageUrl="/images/path.jpg"
         mousePosition={mousePosition}
+        isVignetteVisible={isVignetteVisible}
         client="Gourmandique"
         location="Montreal, Canada"
         description="company website"
