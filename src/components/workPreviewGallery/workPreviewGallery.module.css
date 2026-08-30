@@ -16,8 +16,8 @@
 }
 
 .vignette {
-  height: 30vw;
-  width: 25vw;
+  height: var(--vignette-height);
+  width: var(--vignette-width);
   position: fixed;
   top: 0;
   z-index: 4;

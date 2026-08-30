@@ -2,7 +2,7 @@
 import styles from "./workPreview.module.css";
 import { WorkPreviewGallery } from "../workPreviewGallery/workPreviewGallery";
 import { useSpring } from "motion/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const WorkPreview = () => {
   // do each work section full screen width and height + add some glassmorphism cards on top for description
@@ -22,16 +22,36 @@ export const WorkPreview = () => {
 
   const [isVignetteVisible, setIsVignetteVisible] = useState(false);
 
+  const sectionRef = useRef<HTMLElement>(null);
+  // cached so we don't run getComputedStyle on every mousemove
+  const vignetteSize = useRef({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const readVignetteSize = () => {
+      if (!sectionRef.current) return;
+      const sectionStyles = getComputedStyle(sectionRef.current);
+      vignetteSize.current = {
+        width: parseFloat(sectionStyles.getPropertyValue("--vignette-width")),
+        height: parseFloat(sectionStyles.getPropertyValue("--vignette-height")),
+      };
+    };
+
+    readVignetteSize();
+    window.addEventListener("resize", readVignetteSize);
+    return () => window.removeEventListener("resize", readVignetteSize);
+  }, []);
+
   const mouseMove = (e: any) => {
     const { clientX, clientY } = e;
-    const targetX = clientX - (window.innerWidth * 0.25) / 2; // because vignette width is 0.25vw? check size responsivness?
-    const targetY = clientY - (window.innerHeight * 0.6) / 2; // because vignette height is 0.3vw?
-    mousePosition.x.set(targetX);
-    mousePosition.y.set(targetY);
+    const { width, height } = vignetteSize.current;
+    // centre the vignette on the cursor
+    mousePosition.x.set(clientX - width / 2);
+    mousePosition.y.set(clientY - height / 2);
   };
 
   return (
     <section
+      ref={sectionRef}
       className={styles.workPreviewSection}
       onMouseMove={mouseMove}
       onMouseEnter={() => setIsVignetteVisible(true)}

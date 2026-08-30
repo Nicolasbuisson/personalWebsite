@@ -1,2 +1,18 @@
 .workPreviewSection {
+  --vignette-width: 480px;
+  --vignette-height: 360px;
+}
+
+@media (width < 1020px) {
+  .workPreviewSection {
+    --vignette-width: 340px;
+    --vignette-height: 255px;
+  }
+}
+
+@media (width < 620px) {
+  .workPreviewSection {
+    --vignette-width: 240px;
+    --vignette-height: 180px;
+  }
 }
