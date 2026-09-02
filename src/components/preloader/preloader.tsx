@@ -86,12 +86,12 @@ export const Preloader = () => {
     );
     timeline.to(
       nicoRef.current,
-      { x: "-7.5ch", duration: 0.6, ease: "power1.out" },
+      { x: "-6.7ch", duration: 0.6, ease: "power1.out" },
       "<",
     );
     timeline.to(
       buissonRef.current,
-      { x: "-9ch", duration: 0.6, ease: "power1.out" },
+      { x: "-9.4ch", duration: 0.6, ease: "power1.out" },
       "<",
     );
     // The mask is only as wide as "Code by Nico", so "Buisson" would land 2ch

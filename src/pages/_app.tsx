@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Preloader } from "@/components/preloader/preloader";
+import { nunito } from "@/styles/fonts";
 
 const PRELOADER_DURATION = 3200;
 
@@ -42,13 +43,13 @@ export default function App({ Component, pageProps, router }: AppProps) {
   }, [router.events]);
 
   return (
-    <>
+    <div className={nunito.variable}>
       <AnimatePresence mode="wait">
         {isLoading && <Preloader />}
       </AnimatePresence>
       <AnimatePresence mode="wait">
         <Component key={router.route} {...pageProps} skipEnter={skipEnter} />
       </AnimatePresence>
-    </>
+    </div>
   );
 }

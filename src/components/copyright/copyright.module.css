@@ -51,9 +51,9 @@
 }
 
 .logo:hover .nico {
-  transform: translateX(-6ch);
+  transform: translateX(-6.7ch);
 }
 
 .logo:hover .buisson {
-  transform: translateX(-9.8ch);
+  transform: translateX(-9.75ch);
 }
