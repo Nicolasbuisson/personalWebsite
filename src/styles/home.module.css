@@ -1,7 +1,3 @@
-.page {
-  font-family: var(--font-geist-sans);
-}
-
 .aboutSection {
   padding-inline: var(--section-padding-inline);
   padding-block: calc(1.5 * var(--section-padding-block));

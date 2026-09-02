@@ -4,19 +4,8 @@ import styles from "../styles/home.module.css";
 import { HomeHero } from "@/components/homeHero/homeHero";
 import { WorkPreview } from "@/components/workPreview/workPreview";
 import { Description } from "@/components/description/description";
-import { Geist, Geist_Mono } from "next/font/google";
 import Head from "next/head";
 import { Curve } from "@/components/pageTransition/curve";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 // `skipEnter` is injected by _app: true only on a hard load of "/", where the
 // preloader is already covering the screen and the Curve entry would compete
@@ -31,9 +20,7 @@ export default function Home({ skipEnter }: { skipEnter?: boolean }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Curve skipEnter={skipEnter}>
-        <div
-          className={`${styles.page} ${geistSans.variable} ${geistMono.variable}`}
-        >
+        <div>
           <HomeHero />
           <section className={styles.aboutSection}>
             <Description />

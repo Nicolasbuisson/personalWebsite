@@ -102,7 +102,7 @@ body {
   border: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: var(--font-geist-sans);
+  font-family: var(--ff-primary);
   font-weight: 400;
   scroll-behavior: smooth;
 }
@@ -120,7 +120,7 @@ body {
 body {
   color: var(--clr-text);
   background: var(--clr-body-bg);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--ff-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
