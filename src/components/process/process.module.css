@@ -1,0 +1,172 @@
+.processContainer {
+  margin-inline: auto;
+  padding-block: var(--section-padding-block);
+  padding-inline: calc(var(--section-padding-inline) - 4rem);
+}
+
+.processHeader {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.processHeader h2 {
+  font-size: var(--fs-h4);
+}
+
+.processHeader h3 {
+  font-size: var(--fs-h3);
+  font-weight: 700;
+}
+
+.processHeader h3 span {
+  font-weight: 700;
+}
+
+.processHeaderParagraph {
+  text-wrap: balance;
+}
+
+.processMap {
+  --node-gap: 2rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(4, 1fr);
+}
+
+.processMap > div {
+  /* Each node sits at 31% / 69% of the map's width (see the svg viewBox).
+     Column 1 is half the map, so 31% of the map == 62% of the column —
+     the same figure works for the right-aligned even steps. */
+  max-width: min(33ch, calc(62% - var(--node-gap)));
+}
+
+.processSvg {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  place-self: center;
+  width: 100%;
+  height: 100%;
+  stroke: var(--clr-accent);
+}
+
+.processSvg path {
+  filter: drop-shadow(var(--clr-accent) 0px 0px 6px);
+}
+
+.processNode {
+  position: absolute;
+  left: var(--node-x);
+  top: var(--node-y);
+  width: 0.75rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: var(--clr-accent);
+  translate: -50% -50%;
+  filter: drop-shadow(var(--clr-accent) 0px 0px 6px);
+  pointer-events: none;
+}
+
+.processMap > div:nth-of-type(1) {
+  grid-row: 1;
+  grid-column: 1;
+  align-self: center;
+}
+
+.processMap > div:nth-of-type(2) {
+  grid-row: 2;
+  grid-column: 2;
+  align-self: center;
+  justify-self: end;
+}
+
+.processMap > div:nth-of-type(3) {
+  grid-row: 3;
+  grid-column: 1;
+  align-self: center;
+}
+
+.processMap > div:nth-of-type(4) {
+  grid-row: 4;
+  grid-column: 2;
+  align-self: center;
+  justify-self: end;
+}
+
+/* Below this width the two lanes are too narrow to read, so the curve goes
+   away and the steps stack, each one led by its node. */
+@media (max-width: 879px) {
+  .processHeader {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+  .processSvg {
+    display: none;
+  }
+
+  .processMap {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* :nth-of-type(n) matches every step and carries the same specificity as the
+     per-step rules above, so this wins on source order */
+  .processMap > div:nth-of-type(n) {
+    grid-column: 1;
+    justify-self: start;
+    align-self: start;
+    max-width: 100%;
+    padding-inline-start: calc(0.75rem + var(--node-gap) / 2);
+  }
+
+  /* the nodes become flow items in the same cell as their step, sitting in
+     the padding the rule above reserves for them */
+  .processMap > span {
+    position: relative;
+    left: auto;
+    top: auto;
+    grid-column: 1;
+    justify-self: start;
+    align-self: start;
+    translate: none;
+    margin-block-start: 0.4em;
+    z-index: 1;
+  }
+
+  .processMap > span:nth-of-type(1) {
+    grid-row: 1;
+  }
+
+  .processMap > span:nth-of-type(2) {
+    grid-row: 2;
+  }
+
+  .processMap > span:nth-of-type(3) {
+    grid-row: 3;
+  }
+
+  .processMap > span:nth-of-type(4) {
+    grid-row: 4;
+  }
+}
+
+@media (width > 1440px) {
+  .processMap > div:nth-of-type(1) {
+    grid-row: 1;
+  }
+
+  .processMap > div:nth-of-type(2) {
+    grid-row: 2;
+  }
+
+  .processMap > div:nth-of-type(3) {
+    grid-row: 3;
+  }
+
+  .processMap > div:nth-of-type(4) {
+    margin-right: 6rem;
+  }
+}

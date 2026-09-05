@@ -1,0 +1,15 @@
+.processStepContainer {
+  /* the responsive cap lives on .processMap > div, next to the node geometry */
+  min-width: 0;
+}
+
+.processStepHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.processStepContent {
+  margin-top: 4px;
+  text-wrap: pretty;
+}
