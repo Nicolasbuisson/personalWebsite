@@ -9,7 +9,9 @@ const VIEWBOX_WIDTH = 1171;
 const VIEWBOX_HEIGHT = 653;
 const NODE_X_ODD = 363.01;
 const NODE_X_EVEN = 807.99;
-const NODE_Y = [91.42, 248.14, 404.86, 561.58];
+// 653 / 8 apart, so the nodes land on 12.5% / 37.5% / 62.5% / 87.5% — the exact
+// centres of the map's four equal rows.
+const NODE_Y = [81.625, 244.875, 408.125, 571.375];
 
 const steps: IProcessSteps[] = [
   {
@@ -68,7 +70,7 @@ export const Process = () => {
           aria-hidden="true"
         >
           <path
-            d="M 363.01 91.42 C 363.01 169.78 807.9899999999999 169.78 807.9899999999999 248.14000000000001 C 807.9899999999999 326.5 363.01 326.5 363.01 404.86 C 363.01 483.22 807.9899999999999 483.22 807.9899999999999 561.58"
+            d="M 363.01 81.625 C 363.01 163.25 807.99 163.25 807.99 244.875 C 807.99 326.5 363.01 326.5 363.01 408.125 C 363.01 489.75 807.99 489.75 807.99 571.375"
             stroke-width="3"
             stroke-linecap="round"
             pathLength="1"

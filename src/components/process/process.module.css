@@ -31,15 +31,18 @@
   --node-gap: 2rem;
   position: relative;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* left lane | the curve's swing | right lane. The nodes sit at 31% / 69% of
+     the map's width (see the svg viewBox), so the lanes end exactly
+     --node-gap short of them and the steps stay glued to the curve. */
+  grid-template-columns:
+    calc(31% - var(--node-gap))
+    1fr
+    calc(31% - var(--node-gap));
   grid-template-rows: repeat(4, 1fr);
 }
 
 .processMap > div {
-  /* Each node sits at 31% / 69% of the map's width (see the svg viewBox).
-     Column 1 is half the map, so 31% of the map == 62% of the column —
-     the same figure works for the right-aligned even steps. */
-  max-width: min(33ch, calc(62% - var(--node-gap)));
+  max-width: 33ch;
 }
 
 .processSvg {
@@ -72,26 +75,28 @@
   grid-row: 1;
   grid-column: 1;
   align-self: center;
+  justify-self: end;
 }
 
 .processMap > div:nth-of-type(2) {
   grid-row: 2;
-  grid-column: 2;
+  grid-column: 3;
   align-self: center;
-  justify-self: end;
+  justify-self: start;
 }
 
 .processMap > div:nth-of-type(3) {
   grid-row: 3;
   grid-column: 1;
   align-self: center;
+  justify-self: end;
 }
 
 .processMap > div:nth-of-type(4) {
   grid-row: 4;
-  grid-column: 2;
+  grid-column: 3;
   align-self: center;
-  justify-self: end;
+  justify-self: start;
 }
 
 /* Below this width the two lanes are too narrow to read, so the curve goes
@@ -150,23 +155,5 @@
 
   .processMap > span:nth-of-type(4) {
     grid-row: 4;
-  }
-}
-
-@media (width > 1440px) {
-  .processMap > div:nth-of-type(1) {
-    grid-row: 1;
-  }
-
-  .processMap > div:nth-of-type(2) {
-    grid-row: 2;
-  }
-
-  .processMap > div:nth-of-type(3) {
-    grid-row: 3;
-  }
-
-  .processMap > div:nth-of-type(4) {
-    margin-right: 6rem;
   }
 }
