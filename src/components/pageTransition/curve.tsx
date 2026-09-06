@@ -3,6 +3,7 @@ import styles from "./curve.module.css";
 import { ReactNode, useEffect, useMemo, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { useRouter } from "next/router";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 // Animate `y` (compositor) instead of `top` (layout/paint), matching the SVG
@@ -179,10 +180,16 @@ export const Curve = ({
         {routes[router.route]}
       </motion.p>
       {dimensions.width !== 0 && <SVG {...dimensions} skipEnter={skipEnter} />}
+      {/* Everything on the page rides in on this wrapper's `y`, so while the
+          enter animation runs the content sits 300px below where it will
+          settle. Any ScrollTrigger a child sets up on mount measures against
+          that offset, so its start/end land 300px late — re-measure once the
+          transform is gone. */}
       <motion.div
         variants={translateContent}
         initial={initialState}
         animate={enterState}
+        onAnimationComplete={() => ScrollTrigger.refresh()}
       >
         {children}
       </motion.div>

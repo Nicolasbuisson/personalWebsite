@@ -1,5 +1,7 @@
 "use client";
-import { CSSProperties, Fragment } from "react";
+import { CSSProperties, Fragment, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import styles from "./process.module.css";
 import { IProcessSteps, ProcessStep } from "./processStep";
 
@@ -44,7 +46,102 @@ const steps: IProcessSteps[] = [
   },
 ];
 
+// The scrubbed timeline is 1 unit long, so every position below reads as a
+// percentage of the scroll animation.
+const NODE_STARTS = [0.01, 0.34, 0.67, 0.99];
+const POP_OUT_DURATION = 0.05; // 0% -> 130%
+const POP_BACK_DURATION = 0.03; // 130% -> 100%
+const STEP_DURATION = POP_OUT_DURATION + POP_BACK_DURATION;
+const STEP_SLIDE_DISTANCE = 60; // px the step travels in from its own side
+
+// for mobile, just do inView slide up processNode + processStep
+
 export const Process = () => {
+  const mapRef = useRef<HTMLDivElement>(null);
+  const pathRef = useRef<SVGPathElement>(null);
+  const nodeRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Below 880px the curve is hidden and the steps stack in one column, so
+    // there is no path to draw and no left/right to slide in from.
+    const mediaQuery = gsap.matchMedia();
+    mediaQuery.add("(min-width: 880px)", () => {
+      const path = pathRef.current;
+      if (!path) return;
+
+      const pathLength = path.getTotalLength();
+      // pathLength="1" only exists so the server-rendered curve starts hidden.
+      // Drop it now that the dashes run on the path's real user units.
+      path.removeAttribute("pathLength");
+
+      const timeline = gsap.timeline({
+        defaults: { ease: "none" },
+        scrollTrigger: {
+          trigger: mapRef.current,
+          start: "top 50%",
+          end: "bottom 50%",
+          scrub: true,
+        },
+      });
+
+      // Both numbers have to be spelled out: GSAP number-matches against the
+      // dasharray already on the element ("1 1"), so a single value would only
+      // replace the dash and leave a 1px gap behind — which renders as a fully
+      // drawn curve with a speck travelling along it instead of a draw-on.
+      timeline.fromTo(
+        path,
+        {
+          strokeDasharray: `${pathLength} ${pathLength}`,
+          strokeDashoffset: pathLength,
+        },
+        { strokeDashoffset: 0, duration: 1 },
+        0,
+      );
+
+      NODE_STARTS.forEach((start, index) => {
+        const node = nodeRefs.current[index];
+        const step = stepRefs.current[index];
+        if (!node || !step) return;
+
+        timeline
+          .fromTo(
+            node,
+            { scale: 0 },
+            { scale: 1.3, duration: POP_OUT_DURATION, ease: "power2.out" },
+            start,
+          )
+          .to(
+            node,
+            { scale: 1, duration: POP_BACK_DURATION, ease: "power2.inOut" },
+            start + POP_OUT_DURATION,
+          );
+
+        // Odd-numbered steps sit in the left lane, even ones in the right lane;
+        // each one slides in from the edge it is anchored to.
+        const isOdd = index % 2 === 0;
+        timeline.fromTo(
+          step,
+          {
+            autoAlpha: 0,
+            x: isOdd ? -STEP_SLIDE_DISTANCE : STEP_SLIDE_DISTANCE,
+          },
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: STEP_DURATION,
+            ease: "power2.out",
+          },
+          start,
+        );
+      });
+    });
+
+    return () => mediaQuery.revert();
+  }, []);
+
   return (
     <section className={styles.processContainer}>
       <div className={styles.processHeader}>
@@ -61,7 +158,7 @@ export const Process = () => {
           anything comes up.
         </p>
       </div>
-      <div className={styles.processMap}>
+      <div className={styles.processMap} ref={mapRef}>
         <svg
           className={styles.processSvg}
           viewBox="0 0 1171 653"
@@ -69,19 +166,25 @@ export const Process = () => {
           fill="none"
           aria-hidden="true"
         >
+          {/* pathLength + the dashes keep the curve hidden until the timeline
+              takes over on hydration */}
           <path
+            ref={pathRef}
             d="M 363.01 81.625 C 363.01 163.25 807.99 163.25 807.99 244.875 C 807.99 326.5 363.01 326.5 363.01 408.125 C 363.01 489.75 807.99 489.75 807.99 571.375"
-            stroke-width="3"
-            stroke-linecap="round"
-            pathLength="1"
-            stroke-dashoffset="0px"
-            stroke-dasharray="1px 1px"
+            strokeWidth="3"
+            strokeLinecap="round"
+            pathLength={1}
+            strokeDashoffset={1}
+            strokeDasharray="1 1"
           ></path>
         </svg>
         {steps.map((step, index) => (
           <Fragment key={step.number}>
             <span
               className={styles.processNode}
+              ref={(element) => {
+                nodeRefs.current[index] = element;
+              }}
               style={
                 {
                   "--node-x": `${
@@ -94,6 +197,9 @@ export const Process = () => {
               }
             />
             <ProcessStep
+              ref={(element) => {
+                stepRefs.current[index] = element;
+              }}
               number={step.number}
               title={step.title}
               subtitle={step.subtitle}

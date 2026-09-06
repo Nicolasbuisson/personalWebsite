@@ -1,19 +1,9 @@
 import styles from "../../styles/work.module.css";
 import { Header } from "@/components/header/header";
 import { Curve } from "@/components/pageTransition/curve";
+import { Process } from "@/components/process/process";
 import { ProjectGallery } from "@/components/projectGallery/projectGallery";
 import Head from "next/head";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export default function Work() {
   return (
@@ -25,13 +15,13 @@ export default function Work() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Curve>
-        <div
-          className={`${styles.workPage} ${geistSans.variable} ${geistMono.variable}`}
-        >
+        <div className={styles.workPage}>
           <Header />
           <div className={styles.projectGalleryContainer}>
             <ProjectGallery />
           </div>
+          <Process />
+          <div style={{ height: "800px" }}></div>
         </div>
       </Curve>
     </>

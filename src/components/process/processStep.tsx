@@ -1,3 +1,4 @@
+import { Ref } from "react";
 import styles from "./processStep.module.css";
 
 export interface IProcessSteps {
@@ -7,9 +8,15 @@ export interface IProcessSteps {
   content: string;
 }
 
-export const ProcessStep = (props: IProcessSteps) => {
+interface IProcessStepProps extends IProcessSteps {
+  // the parent drives the scroll timeline, so it needs a handle on the container
+  ref?: Ref<HTMLDivElement>;
+}
+
+export const ProcessStep = ({ ref, ...props }: IProcessStepProps) => {
+  // styling todo
   return (
-    <div className={styles.processStepContainer}>
+    <div ref={ref} className={styles.processStepContainer}>
       <div className={styles.processStepHeader}>
         <h4>
           <span>{props.number}</span> {props.title}
