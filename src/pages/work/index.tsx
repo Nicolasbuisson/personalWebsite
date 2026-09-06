@@ -21,7 +21,7 @@ export default function Work() {
             <ProjectGallery />
           </div>
           <Process />
-          <div style={{ height: "800px" }}></div>
+          <div style={{ height: "800px" }}>Next section, testimonials?</div>
         </div>
       </Curve>
     </>

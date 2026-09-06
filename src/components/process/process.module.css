@@ -27,6 +27,26 @@
   text-wrap: balance;
 }
 
+/* The timeline pins this section, so on desktop it has to fit the viewport
+   exactly: ScrollTrigger holds it still while the curve draws, and any height
+   past the screen would sit permanently cut off. Capping the height and letting
+   the map take the leftover space keeps it framed on short laptop screens too. */
+@media (min-width: 880px) {
+  .processContainer {
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    padding-block: min(var(--section-padding-block), 8vh);
+  }
+
+  .processMap {
+    flex: 1;
+    min-height: 0;
+  }
+}
+
 .processMap {
   --node-gap: 2rem;
   position: relative;

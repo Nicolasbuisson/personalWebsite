@@ -57,6 +57,7 @@ const STEP_SLIDE_DISTANCE = 60; // px the step travels in from its own side
 // for mobile, just do inView slide up processNode + processStep
 
 export const Process = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const mapRef = useRef<HTMLDivElement>(null);
   const pathRef = useRef<SVGPathElement>(null);
   const nodeRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -80,9 +81,20 @@ export const Process = () => {
       const timeline = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
-          trigger: mapRef.current,
-          start: "top 50%",
-          end: "bottom 50%",
+          trigger: sectionRef.current,
+          // The section parks against the top of the viewport and stays there
+          // for the whole draw, so the timeline no longer maps onto the
+          // section's own height — it maps onto how long we hold the pin.
+          start: "top top",
+          end: () => "+=" + window.innerHeight * 1.5,
+          pin: true,
+          // ScrollTrigger inserts a pin-spacer sized to the pin's duration, so
+          // whatever follows is pushed down by exactly the scroll distance the
+          // timeline consumes. No hand-built sticky wrapper, no magic height.
+          pinSpacing: true,
+          // Fast scrolling can blow past the pin start by a frame; this lets
+          // ScrollTrigger latch slightly early so the section doesn't jump.
+          anticipatePin: 1,
           scrub: true,
         },
       });
@@ -143,7 +155,7 @@ export const Process = () => {
   }, []);
 
   return (
-    <section className={styles.processContainer}>
+    <section className={styles.processContainer} ref={sectionRef}>
       <div className={styles.processHeader}>
         <div>
           <h2>How I work</h2>
