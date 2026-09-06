@@ -9,7 +9,23 @@
   gap: 4px;
 }
 
+.processStepHeader h4 {
+  font-size: 1rem;
+}
+
 .processStepContent {
   margin-top: 4px;
   text-wrap: pretty;
+  line-height: 1;
+  font-size: 0.8rem;
+}
+
+@media (width > 1040px) {
+  .processStepHeader h4 {
+    font-size: var(--fs-h4);
+  }
+
+  .processStepContent {
+    font-size: 1rem;
+  }
 }

@@ -25,6 +25,7 @@
 
 .processHeaderParagraph {
   text-wrap: balance;
+  line-height: 1.1;
 }
 
 /* The timeline pins this section, so on desktop it has to fit the viewport
@@ -37,13 +38,17 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2rem;
-    padding-block: min(var(--section-padding-block), 8vh);
+    gap: clamp(1rem, 3vh, 2rem);
+    padding-block: min(var(--section-padding-block), 4vh);
   }
 
   .processMap {
     flex: 1;
     min-height: 0;
+    /* Narrow viewports need the lanes back: a smaller gap widens both text
+       columns, which is what keeps the steps from wrapping into a taller row
+       than the quarter-of-the-map they are allotted. */
+    --node-gap: clamp(0.75rem, 2.5vw, 2rem);
   }
 }
 
@@ -58,7 +63,14 @@
     calc(31% - var(--node-gap))
     1fr
     calc(31% - var(--node-gap));
-  grid-template-rows: repeat(4, 1fr);
+  /* minmax(0, ...) rather than a bare 1fr: `1fr` is minmax(auto, 1fr), and that
+     `auto` floor stops a row shrinking below its text. Once the section is
+     height-capped for the pin, that floor makes the four rows overflow the
+     map's own box — the svg spans all four rows so it stretches to the taller
+     grid height, while the nodes are positioned as a percentage of the box.
+     The two then disagree by a few percent per row, which is what made the
+     nodes slide off the curve. A 0 floor keeps grid height == box height. */
+  grid-template-rows: repeat(4, minmax(0, 1fr));
 }
 
 .processMap > div {
